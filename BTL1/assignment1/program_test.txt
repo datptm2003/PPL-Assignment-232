@@ -1,0 +1,18 @@
+## Helper function
+func getVar(number x, bool b0)
+
+func getVar(number x, bool b0)
+begin
+    var a <- "abc\nt."..."67+\t12"
+    var b <- (true and b0) or a == "315" and b0 >= 7
+    return a
+end
+
+var const <- 4
+
+## Main function:
+func main()
+begin
+    var x <- const* (4 + -12)
+    number arr[3] <- [const,n[8],  getVar(6,true)]
+end
