@@ -21,8 +21,8 @@ class Symbol:
 class StaticChecker(BaseVisitor,Utils):
 
     global_envi = [
-    Symbol("getInt",MType([],IntegerType())),
-    Symbol("putIntLn",MType([IntegerType()],VoidType()))
+    Symbol("getInt",NumberType()),
+    Symbol("putIntLn",[NumberType()])
     ]
             
     

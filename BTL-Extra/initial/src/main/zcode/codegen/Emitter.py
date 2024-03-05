@@ -13,12 +13,15 @@ class Emitter():
         self.jvm = JasminCode()
 
     def getJVMType(self, inType):
-        typeIn = type(inType)
-        if typeIn is IntegerType:
+        if inType is None:
+            typeIn = None
+        else:
+            typeIn = type(inType)
+        if typeIn is NumberType:
             return "I"
         elif typeIn is cgen.StringType:
             return "Ljava/lang/String;"
-        elif typeIn is VoidType:
+        elif typeIn is None:
             return "V"
         elif typeIn is cgen.ArrayPointerType:
             return "[" + self.getJVMType(inType.eleType)
@@ -29,7 +32,7 @@ class Emitter():
 
     def getFullType(inType):
         typeIn = type(inType)
-        if typeIn is IntegerType:
+        if typeIn is NumberType:
             return "int"
         elif typeIn is cgen.StringType:
             return "java/lang/String"
@@ -40,7 +43,7 @@ class Emitter():
         #in: Int or Sring
         #frame: Frame
         
-        frame.push();
+        frame.push()
         if type(in_) is int:
             i = in_
             if i >= -1 and i <=5:
@@ -79,7 +82,7 @@ class Emitter():
         #typ: Type
         #frame: Frame
         
-        if type(typ) is IntegerType:
+        if type(typ) is NumberType:
             return self.emitPUSHICONST(in_, frame)
         elif type(typ) is StringType:
             frame.push()
@@ -95,7 +98,7 @@ class Emitter():
         #..., arrayref, index, value -> ...
         
         frame.pop()
-        if type(in_) is IntegerType:
+        if type(in_) is NumberType:
             return self.jvm.emitIALOAD()
         elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
             return self.jvm.emitAALOAD()
@@ -110,7 +113,7 @@ class Emitter():
         frame.pop()
         frame.pop()
         frame.pop()
-        if type(in_) is IntegerType:
+        if type(in_) is NumberType:
             return self.jvm.emitIASTORE()
         elif type(in_) is cgen.ArrayPointerType or type(in_) is cgen.ClassType or type(in_) is StringType:
             return self.jvm.emitAASTORE()
@@ -142,7 +145,7 @@ class Emitter():
         #... -> ..., value
         
         frame.push()
-        if type(inType) is IntegerType:
+        if type(inType) is NumberType:
             return self.jvm.emitILOAD(index)
         elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
             return self.jvm.emitALOAD(index)
@@ -174,7 +177,7 @@ class Emitter():
         
         frame.pop()
 
-        if type(inType) is IntegerType:
+        if type(inType) is NumberType:
             return self.jvm.emitISTORE(index)
         elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
             return self.jvm.emitASTORE(index)
@@ -249,7 +252,7 @@ class Emitter():
 
         typ = in_
         list(map(lambda x: frame.pop(), typ.partype))
-        if not type(typ.rettype) is VoidType:
+        if not type(typ.rettype) is None:
             frame.push()
         return self.jvm.emitINVOKESTATIC(lexeme, self.getJVMType(in_))
 
@@ -298,7 +301,7 @@ class Emitter():
         #frame: Frame
         #..., value -> ..., result
 
-        if type(in_) is IntegerType:
+        if type(in_) is NumberType:
             return self.jvm.emitINEG()
         else:
             return self.jvm.emitFNEG()
@@ -331,12 +334,12 @@ class Emitter():
 
         frame.pop()
         if lexeme == "+":
-            if type(in_) is IntegerType:
+            if type(in_) is NumberType:
                 return self.jvm.emitIADD()
             else:
                 return self.jvm.emitFADD()
         else:
-            if type(in_) is IntegerType:
+            if type(in_) is NumberType:
                 return self.jvm.emitISUB()
             else:
                 return self.jvm.emitFSUB()
@@ -355,12 +358,12 @@ class Emitter():
 
         frame.pop()
         if lexeme == "*":
-            if type(in_) is IntegerType:
+            if type(in_) is NumberType:
                 return self.jvm.emitIMUL()
             else:
                 return self.jvm.emitFMUL()
         else:
-            if type(in_) is IntegerType:
+            if type(in_) is NumberType:
                 return self.jvm.emitIDIV()
             else:
                 return self.jvm.emitFDIV()
@@ -420,11 +423,11 @@ class Emitter():
             result.append(self.jvm.emitIFICMPEQ(labelF))
         elif op == "==":
             result.append(self.jvm.emitIFICMPNE(labelF))
-        result.append(self.emitPUSHCONST("1", IntegerType(), frame))
+        result.append(self.emitPUSHCONST("1", NumberType(), frame))
         frame.pop()
         result.append(self.emitGOTO(labelO, frame))
         result.append(self.emitLABEL(labelF, frame))
-        result.append(self.emitPUSHCONST("0", IntegerType(), frame))
+        result.append(self.emitPUSHCONST("0", NumberType(), frame))
         result.append(self.emitLABEL(labelO, frame))
         return ''.join(result)
 
@@ -467,7 +470,7 @@ class Emitter():
         #in_: Type
         #isStatic: Boolean
         #frame: Frame
-
+        # print(self.getJVMType(in_))
         return self.jvm.emitMETHOD(lexeme, self.getJVMType(in_), isStatic)
 
     '''   generate the end directive for a function.
@@ -484,7 +487,7 @@ class Emitter():
     def getConst(self, ast):
         #ast: Literal
         if type(ast) is IntLiteral:
-            return (str(ast.value), IntegerType())
+            return (str(ast.value), NumberType())
 
     '''   generate code to initialize a local array variable.<p>
     *   @param index the index of the local variable.
@@ -558,7 +561,7 @@ class Emitter():
 
     ''' generate code to return.
     *   <ul>
-    *   <li>ireturn if the type is IntegerType or BooleanType
+    *   <li>ireturn if the type is NumberType or BooleanType
     *   <li>freturn if the type is RealType
     *   <li>return if the type is null
     *   </ul>
@@ -568,11 +571,15 @@ class Emitter():
     def emitRETURN(self, in_, frame):
         #in_: Type
         #frame: Frame
+        if in_ is None:
+            typeIn = None
+        else:
+            typeIn = type(in_)
 
-        if type(in_) is IntegerType:
+        if typeIn is NumberType:
             frame.pop()
             return self.jvm.emitIRETURN()
-        elif type(in_) is VoidType:
+        elif typeIn is None:
             return self.jvm.emitRETURN()
 
     ''' generate code that represents a label	

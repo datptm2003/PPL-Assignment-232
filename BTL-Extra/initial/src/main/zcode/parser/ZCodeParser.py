@@ -1,4 +1,4 @@
-# Generated from f://STUDY MATERIAL//HK232//NGUYEN LY NNLT//ASSIGNMENT//BTL2//assignment2//src//main//zcode//parser//ZCode.g4 by ANTLR 4.13.1
+# Generated from main/zcode/parser/ZCode.g4 by ANTLR 4.9.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -8,139 +8,174 @@ if sys.version_info[1] > 5:
 else:
 	from typing.io import TextIO
 
+
 def serializedATN():
-    return [
-        4,1,49,372,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
-        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
-        2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
-        7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
-        2,27,7,27,2,28,7,28,2,29,7,29,2,30,7,30,2,31,7,31,2,32,7,32,2,33,
-        7,33,2,34,7,34,2,35,7,35,2,36,7,36,2,37,7,37,2,38,7,38,2,39,7,39,
-        2,40,7,40,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,3,1,92,8,1,1,2,1,2,
-        3,2,96,8,2,1,2,1,2,1,2,1,2,3,2,102,8,2,1,3,1,3,3,3,106,8,3,1,4,1,
-        4,1,4,3,4,111,8,4,1,5,1,5,1,5,1,5,1,5,1,5,3,5,119,8,5,1,5,1,5,1,
-        5,3,5,124,8,5,1,5,3,5,127,8,5,1,6,1,6,3,6,131,8,6,1,7,1,7,1,7,1,
-        7,1,7,3,7,138,8,7,1,8,1,8,1,8,3,8,143,8,8,1,9,1,9,1,10,1,10,1,10,
-        1,10,3,10,151,8,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,
-        1,12,1,12,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,14,1,14,
-        1,14,1,14,1,14,1,14,1,14,1,14,3,14,181,8,14,1,15,1,15,1,15,1,15,
-        1,15,1,16,1,16,3,16,190,8,16,1,16,1,16,1,16,1,16,1,17,1,17,1,17,
-        1,17,1,18,1,18,1,18,1,18,3,18,204,8,18,1,19,1,19,3,19,208,8,19,1,
-        20,1,20,1,20,1,20,1,20,3,20,215,8,20,1,21,1,21,1,21,1,21,1,21,3,
-        21,222,8,21,1,22,1,22,1,22,1,22,1,22,3,22,229,8,22,1,23,1,23,1,23,
-        1,23,1,23,1,23,5,23,237,8,23,10,23,12,23,240,9,23,1,24,1,24,1,24,
-        1,24,1,24,1,24,5,24,248,8,24,10,24,12,24,251,9,24,1,25,1,25,1,25,
-        1,25,1,25,1,25,5,25,259,8,25,10,25,12,25,262,9,25,1,26,1,26,1,26,
-        3,26,267,8,26,1,27,1,27,1,27,3,27,272,8,27,1,28,1,28,1,28,1,28,1,
-        28,1,28,1,28,1,28,1,28,1,28,1,28,3,28,285,8,28,1,29,1,29,1,30,1,
-        30,1,30,1,30,1,30,3,30,294,8,30,1,30,1,30,1,30,1,31,1,31,1,31,1,
-        31,1,31,1,31,1,31,1,31,1,31,1,32,1,32,3,32,310,8,32,1,33,1,33,1,
-        33,1,33,3,33,316,8,33,1,34,1,34,1,34,1,34,1,34,1,34,1,34,1,35,1,
-        35,1,35,1,35,1,35,3,35,330,8,35,1,36,1,36,1,36,1,36,1,36,1,36,1,
-        36,1,36,1,36,1,37,1,37,1,37,3,37,344,8,37,1,38,1,38,3,38,348,8,38,
-        1,39,1,39,1,39,1,39,3,39,354,8,39,1,40,1,40,1,40,1,40,1,40,1,40,
-        1,40,1,40,1,40,1,40,3,40,366,8,40,1,40,1,40,3,40,370,8,40,1,40,0,
-        3,46,48,50,41,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,
-        38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,
-        0,5,1,0,10,12,1,0,23,24,1,0,32,33,1,0,34,36,1,0,25,31,378,0,82,1,
-        0,0,0,2,91,1,0,0,0,4,101,1,0,0,0,6,105,1,0,0,0,8,110,1,0,0,0,10,
-        126,1,0,0,0,12,130,1,0,0,0,14,137,1,0,0,0,16,139,1,0,0,0,18,144,
-        1,0,0,0,20,146,1,0,0,0,22,155,1,0,0,0,24,161,1,0,0,0,26,167,1,0,
-        0,0,28,180,1,0,0,0,30,182,1,0,0,0,32,189,1,0,0,0,34,195,1,0,0,0,
-        36,203,1,0,0,0,38,207,1,0,0,0,40,214,1,0,0,0,42,221,1,0,0,0,44,228,
-        1,0,0,0,46,230,1,0,0,0,48,241,1,0,0,0,50,252,1,0,0,0,52,266,1,0,
-        0,0,54,271,1,0,0,0,56,284,1,0,0,0,58,286,1,0,0,0,60,288,1,0,0,0,
-        62,298,1,0,0,0,64,309,1,0,0,0,66,315,1,0,0,0,68,317,1,0,0,0,70,329,
-        1,0,0,0,72,331,1,0,0,0,74,343,1,0,0,0,76,347,1,0,0,0,78,353,1,0,
-        0,0,80,369,1,0,0,0,82,83,3,6,3,0,83,84,3,2,1,0,84,85,5,0,0,1,85,
-        1,1,0,0,0,86,87,3,4,2,0,87,88,3,6,3,0,88,89,3,2,1,0,89,92,1,0,0,
-        0,90,92,3,4,2,0,91,86,1,0,0,0,91,90,1,0,0,0,92,3,1,0,0,0,93,96,3,
-        10,5,0,94,96,3,24,12,0,95,93,1,0,0,0,95,94,1,0,0,0,96,97,1,0,0,0,
-        97,98,5,45,0,0,98,99,3,6,3,0,99,102,1,0,0,0,100,102,3,20,10,0,101,
-        95,1,0,0,0,101,100,1,0,0,0,102,5,1,0,0,0,103,106,3,8,4,0,104,106,
-        1,0,0,0,105,103,1,0,0,0,105,104,1,0,0,0,106,7,1,0,0,0,107,108,5,
-        45,0,0,108,111,3,8,4,0,109,111,5,45,0,0,110,107,1,0,0,0,110,109,
-        1,0,0,0,111,9,1,0,0,0,112,113,5,8,0,0,113,114,5,43,0,0,114,115,5,
-        21,0,0,115,127,3,42,21,0,116,119,3,18,9,0,117,119,5,9,0,0,118,116,
-        1,0,0,0,118,117,1,0,0,0,119,120,1,0,0,0,120,123,5,43,0,0,121,122,
-        5,21,0,0,122,124,3,42,21,0,123,121,1,0,0,0,123,124,1,0,0,0,124,127,
-        1,0,0,0,125,127,3,28,14,0,126,112,1,0,0,0,126,118,1,0,0,0,126,125,
-        1,0,0,0,127,11,1,0,0,0,128,131,3,14,7,0,129,131,1,0,0,0,130,128,
-        1,0,0,0,130,129,1,0,0,0,131,13,1,0,0,0,132,133,3,16,8,0,133,134,
-        5,42,0,0,134,135,3,14,7,0,135,138,1,0,0,0,136,138,3,16,8,0,137,132,
-        1,0,0,0,137,136,1,0,0,0,138,15,1,0,0,0,139,142,3,18,9,0,140,143,
-        5,43,0,0,141,143,3,30,15,0,142,140,1,0,0,0,142,141,1,0,0,0,143,17,
-        1,0,0,0,144,145,7,0,0,0,145,19,1,0,0,0,146,147,3,24,12,0,147,150,
-        3,6,3,0,148,151,3,22,11,0,149,151,3,74,37,0,150,148,1,0,0,0,150,
-        149,1,0,0,0,151,152,1,0,0,0,152,153,5,45,0,0,153,154,3,6,3,0,154,
-        21,1,0,0,0,155,156,5,16,0,0,156,157,5,45,0,0,157,158,3,6,3,0,158,
-        159,3,76,38,0,159,160,5,17,0,0,160,23,1,0,0,0,161,162,5,2,0,0,162,
-        163,5,43,0,0,163,164,5,40,0,0,164,165,3,12,6,0,165,166,5,41,0,0,
-        166,25,1,0,0,0,167,168,5,43,0,0,168,169,5,40,0,0,169,170,3,38,19,
-        0,170,171,5,41,0,0,171,27,1,0,0,0,172,173,3,18,9,0,173,174,3,30,
-        15,0,174,175,5,21,0,0,175,176,3,42,21,0,176,181,1,0,0,0,177,178,
-        3,18,9,0,178,179,3,30,15,0,179,181,1,0,0,0,180,172,1,0,0,0,180,177,
-        1,0,0,0,181,29,1,0,0,0,182,183,5,43,0,0,183,184,5,38,0,0,184,185,
-        3,36,18,0,185,186,5,39,0,0,186,31,1,0,0,0,187,190,5,43,0,0,188,190,
-        3,26,13,0,189,187,1,0,0,0,189,188,1,0,0,0,190,191,1,0,0,0,191,192,
-        5,38,0,0,192,193,3,40,20,0,193,194,5,39,0,0,194,33,1,0,0,0,195,196,
-        5,38,0,0,196,197,3,40,20,0,197,198,5,39,0,0,198,35,1,0,0,0,199,200,
-        5,19,0,0,200,201,5,42,0,0,201,204,3,36,18,0,202,204,5,19,0,0,203,
-        199,1,0,0,0,203,202,1,0,0,0,204,37,1,0,0,0,205,208,3,40,20,0,206,
-        208,1,0,0,0,207,205,1,0,0,0,207,206,1,0,0,0,208,39,1,0,0,0,209,210,
-        3,42,21,0,210,211,5,42,0,0,211,212,3,40,20,0,212,215,1,0,0,0,213,
-        215,3,42,21,0,214,209,1,0,0,0,214,213,1,0,0,0,215,41,1,0,0,0,216,
-        217,3,44,22,0,217,218,5,37,0,0,218,219,3,44,22,0,219,222,1,0,0,0,
-        220,222,3,44,22,0,221,216,1,0,0,0,221,220,1,0,0,0,222,43,1,0,0,0,
-        223,224,3,46,23,0,224,225,3,58,29,0,225,226,3,46,23,0,226,229,1,
-        0,0,0,227,229,3,46,23,0,228,223,1,0,0,0,228,227,1,0,0,0,229,45,1,
-        0,0,0,230,231,6,23,-1,0,231,232,3,48,24,0,232,238,1,0,0,0,233,234,
-        10,2,0,0,234,235,7,1,0,0,235,237,3,48,24,0,236,233,1,0,0,0,237,240,
-        1,0,0,0,238,236,1,0,0,0,238,239,1,0,0,0,239,47,1,0,0,0,240,238,1,
-        0,0,0,241,242,6,24,-1,0,242,243,3,50,25,0,243,249,1,0,0,0,244,245,
-        10,2,0,0,245,246,7,2,0,0,246,248,3,50,25,0,247,244,1,0,0,0,248,251,
-        1,0,0,0,249,247,1,0,0,0,249,250,1,0,0,0,250,49,1,0,0,0,251,249,1,
-        0,0,0,252,253,6,25,-1,0,253,254,3,52,26,0,254,260,1,0,0,0,255,256,
-        10,2,0,0,256,257,7,3,0,0,257,259,3,52,26,0,258,255,1,0,0,0,259,262,
-        1,0,0,0,260,258,1,0,0,0,260,261,1,0,0,0,261,51,1,0,0,0,262,260,1,
-        0,0,0,263,264,5,22,0,0,264,267,3,52,26,0,265,267,3,54,27,0,266,263,
-        1,0,0,0,266,265,1,0,0,0,267,53,1,0,0,0,268,269,5,33,0,0,269,272,
-        3,54,27,0,270,272,3,56,28,0,271,268,1,0,0,0,271,270,1,0,0,0,272,
-        55,1,0,0,0,273,274,5,40,0,0,274,275,3,42,21,0,275,276,5,41,0,0,276,
-        285,1,0,0,0,277,285,3,34,17,0,278,285,3,32,16,0,279,285,3,26,13,
-        0,280,285,5,43,0,0,281,285,5,18,0,0,282,285,5,19,0,0,283,285,5,20,
-        0,0,284,273,1,0,0,0,284,277,1,0,0,0,284,278,1,0,0,0,284,279,1,0,
-        0,0,284,280,1,0,0,0,284,281,1,0,0,0,284,282,1,0,0,0,284,283,1,0,
-        0,0,285,57,1,0,0,0,286,287,7,4,0,0,287,59,1,0,0,0,288,293,5,43,0,
-        0,289,290,5,38,0,0,290,291,3,40,20,0,291,292,5,39,0,0,292,294,1,
-        0,0,0,293,289,1,0,0,0,293,294,1,0,0,0,294,295,1,0,0,0,295,296,5,
-        21,0,0,296,297,3,42,21,0,297,61,1,0,0,0,298,299,5,13,0,0,299,300,
-        5,40,0,0,300,301,3,42,21,0,301,302,5,41,0,0,302,303,3,6,3,0,303,
-        304,3,80,40,0,304,305,3,64,32,0,305,306,3,70,35,0,306,63,1,0,0,0,
-        307,310,3,66,33,0,308,310,1,0,0,0,309,307,1,0,0,0,309,308,1,0,0,
-        0,310,65,1,0,0,0,311,312,3,68,34,0,312,313,3,66,33,0,313,316,1,0,
-        0,0,314,316,3,68,34,0,315,311,1,0,0,0,315,314,1,0,0,0,316,67,1,0,
-        0,0,317,318,5,15,0,0,318,319,5,40,0,0,319,320,3,42,21,0,320,321,
-        5,41,0,0,321,322,3,6,3,0,322,323,3,80,40,0,323,69,1,0,0,0,324,325,
-        5,14,0,0,325,326,3,6,3,0,326,327,3,80,40,0,327,330,1,0,0,0,328,330,
-        1,0,0,0,329,324,1,0,0,0,329,328,1,0,0,0,330,71,1,0,0,0,331,332,5,
-        3,0,0,332,333,5,43,0,0,333,334,5,4,0,0,334,335,3,42,21,0,335,336,
-        5,5,0,0,336,337,3,42,21,0,337,338,3,6,3,0,338,339,3,80,40,0,339,
-        73,1,0,0,0,340,341,5,1,0,0,341,344,3,42,21,0,342,344,5,1,0,0,343,
-        340,1,0,0,0,343,342,1,0,0,0,344,75,1,0,0,0,345,348,3,78,39,0,346,
-        348,1,0,0,0,347,345,1,0,0,0,347,346,1,0,0,0,348,77,1,0,0,0,349,350,
-        3,80,40,0,350,351,3,78,39,0,351,354,1,0,0,0,352,354,3,80,40,0,353,
-        349,1,0,0,0,353,352,1,0,0,0,354,79,1,0,0,0,355,370,3,62,31,0,356,
-        370,3,72,36,0,357,366,5,6,0,0,358,366,5,7,0,0,359,366,3,22,11,0,
-        360,366,3,10,5,0,361,366,3,28,14,0,362,366,3,60,30,0,363,366,3,26,
-        13,0,364,366,3,74,37,0,365,357,1,0,0,0,365,358,1,0,0,0,365,359,1,
-        0,0,0,365,360,1,0,0,0,365,361,1,0,0,0,365,362,1,0,0,0,365,363,1,
-        0,0,0,365,364,1,0,0,0,366,367,1,0,0,0,367,368,5,45,0,0,368,370,3,
-        6,3,0,369,355,1,0,0,0,369,356,1,0,0,0,369,365,1,0,0,0,370,81,1,0,
-        0,0,34,91,95,101,105,110,118,123,126,130,137,142,150,180,189,203,
-        207,214,221,228,238,249,260,266,271,284,293,309,315,329,343,347,
-        353,365,369
-    ]
+    with StringIO() as buf:
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\63")
+        buf.write("\u0176\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
+        buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
+        buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
+        buf.write("\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36")
+        buf.write("\4\37\t\37\4 \t \4!\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t")
+        buf.write("&\4\'\t\'\4(\t(\4)\t)\4*\t*\3\2\3\2\3\2\3\2\3\3\3\3\3")
+        buf.write("\3\3\3\3\3\5\3^\n\3\3\4\3\4\5\4b\n\4\3\4\3\4\3\4\3\4\5")
+        buf.write("\4h\n\4\3\5\3\5\5\5l\n\5\3\6\3\6\3\6\5\6q\n\6\3\7\3\7")
+        buf.write("\3\7\3\7\3\7\3\7\5\7y\n\7\3\7\3\7\3\7\5\7~\n\7\3\7\5\7")
+        buf.write("\u0081\n\7\3\b\3\b\5\b\u0085\n\b\3\t\3\t\3\t\3\t\3\t\5")
+        buf.write("\t\u008c\n\t\3\n\3\n\3\n\5\n\u0091\n\n\3\13\3\13\3\f\3")
+        buf.write("\f\3\f\3\f\5\f\u0099\n\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3")
+        buf.write("\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3")
+        buf.write("\17\3\17\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\5\20")
+        buf.write("\u00b7\n\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22\5\22\u00c0")
+        buf.write("\n\22\3\22\3\22\3\22\3\22\3\23\3\23\3\23\3\23\3\24\3\24")
+        buf.write("\3\24\3\24\5\24\u00ce\n\24\3\25\3\25\5\25\u00d2\n\25\3")
+        buf.write("\26\3\26\3\26\3\26\3\26\5\26\u00d9\n\26\3\27\3\27\3\27")
+        buf.write("\3\27\3\27\5\27\u00e0\n\27\3\30\3\30\3\30\3\30\3\30\5")
+        buf.write("\30\u00e7\n\30\3\31\3\31\3\31\3\31\3\31\3\31\7\31\u00ef")
+        buf.write("\n\31\f\31\16\31\u00f2\13\31\3\32\3\32\3\32\3\32\3\32")
+        buf.write("\3\32\7\32\u00fa\n\32\f\32\16\32\u00fd\13\32\3\33\3\33")
+        buf.write("\3\33\3\33\3\33\3\33\7\33\u0105\n\33\f\33\16\33\u0108")
+        buf.write("\13\33\3\34\3\34\3\34\5\34\u010d\n\34\3\35\3\35\3\35\5")
+        buf.write("\35\u0112\n\35\3\36\3\36\3\36\3\36\3\36\3\36\3\36\3\36")
+        buf.write("\3\36\3\36\3\36\5\36\u011f\n\36\3\37\3\37\3 \3 \3 \3 ")
+        buf.write("\3 \5 \u0128\n \3 \3 \3 \3!\3!\3!\3!\3!\3!\3!\3!\3!\3")
+        buf.write("\"\3\"\5\"\u0138\n\"\3#\3#\3#\3#\5#\u013e\n#\3$\3$\3$")
+        buf.write("\3$\3$\3$\3$\3%\3%\3%\3%\3%\5%\u014c\n%\3&\3&\3&\3&\3")
+        buf.write("&\3&\3&\3&\3&\3\'\3\'\3\'\5\'\u015a\n\'\3(\3(\5(\u015e")
+        buf.write("\n(\3)\3)\3)\3)\5)\u0164\n)\3*\3*\3*\3*\3*\3*\3*\3*\3")
+        buf.write("*\3*\5*\u0170\n*\3*\3*\5*\u0174\n*\3*\2\5\60\62\64+\2")
+        buf.write("\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64")
+        buf.write("\668:<>@BDFHJLNPR\2\7\3\2\f\16\3\2\31\32\3\2\"#\3\2$&")
+        buf.write("\3\2\33!\2\u017c\2T\3\2\2\2\4]\3\2\2\2\6g\3\2\2\2\bk\3")
+        buf.write("\2\2\2\np\3\2\2\2\f\u0080\3\2\2\2\16\u0084\3\2\2\2\20")
+        buf.write("\u008b\3\2\2\2\22\u008d\3\2\2\2\24\u0092\3\2\2\2\26\u0094")
+        buf.write("\3\2\2\2\30\u009d\3\2\2\2\32\u00a3\3\2\2\2\34\u00a9\3")
+        buf.write("\2\2\2\36\u00b6\3\2\2\2 \u00b8\3\2\2\2\"\u00bf\3\2\2\2")
+        buf.write("$\u00c5\3\2\2\2&\u00cd\3\2\2\2(\u00d1\3\2\2\2*\u00d8\3")
+        buf.write("\2\2\2,\u00df\3\2\2\2.\u00e6\3\2\2\2\60\u00e8\3\2\2\2")
+        buf.write("\62\u00f3\3\2\2\2\64\u00fe\3\2\2\2\66\u010c\3\2\2\28\u0111")
+        buf.write("\3\2\2\2:\u011e\3\2\2\2<\u0120\3\2\2\2>\u0122\3\2\2\2")
+        buf.write("@\u012c\3\2\2\2B\u0137\3\2\2\2D\u013d\3\2\2\2F\u013f\3")
+        buf.write("\2\2\2H\u014b\3\2\2\2J\u014d\3\2\2\2L\u0159\3\2\2\2N\u015d")
+        buf.write("\3\2\2\2P\u0163\3\2\2\2R\u0173\3\2\2\2TU\5\b\5\2UV\5\4")
+        buf.write("\3\2VW\7\2\2\3W\3\3\2\2\2XY\5\6\4\2YZ\5\b\5\2Z[\5\4\3")
+        buf.write("\2[^\3\2\2\2\\^\5\6\4\2]X\3\2\2\2]\\\3\2\2\2^\5\3\2\2")
+        buf.write("\2_b\5\f\7\2`b\5\32\16\2a_\3\2\2\2a`\3\2\2\2bc\3\2\2\2")
+        buf.write("cd\7/\2\2de\5\b\5\2eh\3\2\2\2fh\5\26\f\2ga\3\2\2\2gf\3")
+        buf.write("\2\2\2h\7\3\2\2\2il\5\n\6\2jl\3\2\2\2ki\3\2\2\2kj\3\2")
+        buf.write("\2\2l\t\3\2\2\2mn\7/\2\2nq\5\n\6\2oq\7/\2\2pm\3\2\2\2")
+        buf.write("po\3\2\2\2q\13\3\2\2\2rs\7\n\2\2st\7-\2\2tu\7\27\2\2u")
+        buf.write("\u0081\5,\27\2vy\5\24\13\2wy\7\13\2\2xv\3\2\2\2xw\3\2")
+        buf.write("\2\2yz\3\2\2\2z}\7-\2\2{|\7\27\2\2|~\5,\27\2}{\3\2\2\2")
+        buf.write("}~\3\2\2\2~\u0081\3\2\2\2\177\u0081\5\36\20\2\u0080r\3")
+        buf.write("\2\2\2\u0080x\3\2\2\2\u0080\177\3\2\2\2\u0081\r\3\2\2")
+        buf.write("\2\u0082\u0085\5\20\t\2\u0083\u0085\3\2\2\2\u0084\u0082")
+        buf.write("\3\2\2\2\u0084\u0083\3\2\2\2\u0085\17\3\2\2\2\u0086\u0087")
+        buf.write("\5\22\n\2\u0087\u0088\7,\2\2\u0088\u0089\5\20\t\2\u0089")
+        buf.write("\u008c\3\2\2\2\u008a\u008c\5\22\n\2\u008b\u0086\3\2\2")
+        buf.write("\2\u008b\u008a\3\2\2\2\u008c\21\3\2\2\2\u008d\u0090\5")
+        buf.write("\24\13\2\u008e\u0091\7-\2\2\u008f\u0091\5 \21\2\u0090")
+        buf.write("\u008e\3\2\2\2\u0090\u008f\3\2\2\2\u0091\23\3\2\2\2\u0092")
+        buf.write("\u0093\t\2\2\2\u0093\25\3\2\2\2\u0094\u0095\5\32\16\2")
+        buf.write("\u0095\u0098\5\b\5\2\u0096\u0099\5\30\r\2\u0097\u0099")
+        buf.write("\5L\'\2\u0098\u0096\3\2\2\2\u0098\u0097\3\2\2\2\u0099")
+        buf.write("\u009a\3\2\2\2\u009a\u009b\7/\2\2\u009b\u009c\5\b\5\2")
+        buf.write("\u009c\27\3\2\2\2\u009d\u009e\7\22\2\2\u009e\u009f\7/")
+        buf.write("\2\2\u009f\u00a0\5\b\5\2\u00a0\u00a1\5N(\2\u00a1\u00a2")
+        buf.write("\7\23\2\2\u00a2\31\3\2\2\2\u00a3\u00a4\7\4\2\2\u00a4\u00a5")
+        buf.write("\7-\2\2\u00a5\u00a6\7*\2\2\u00a6\u00a7\5\16\b\2\u00a7")
+        buf.write("\u00a8\7+\2\2\u00a8\33\3\2\2\2\u00a9\u00aa\7-\2\2\u00aa")
+        buf.write("\u00ab\7*\2\2\u00ab\u00ac\5(\25\2\u00ac\u00ad\7+\2\2\u00ad")
+        buf.write("\35\3\2\2\2\u00ae\u00af\5\24\13\2\u00af\u00b0\5 \21\2")
+        buf.write("\u00b0\u00b1\7\27\2\2\u00b1\u00b2\5,\27\2\u00b2\u00b7")
+        buf.write("\3\2\2\2\u00b3\u00b4\5\24\13\2\u00b4\u00b5\5 \21\2\u00b5")
+        buf.write("\u00b7\3\2\2\2\u00b6\u00ae\3\2\2\2\u00b6\u00b3\3\2\2\2")
+        buf.write("\u00b7\37\3\2\2\2\u00b8\u00b9\7-\2\2\u00b9\u00ba\7(\2")
+        buf.write("\2\u00ba\u00bb\5&\24\2\u00bb\u00bc\7)\2\2\u00bc!\3\2\2")
+        buf.write("\2\u00bd\u00c0\7-\2\2\u00be\u00c0\5\34\17\2\u00bf\u00bd")
+        buf.write("\3\2\2\2\u00bf\u00be\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1")
+        buf.write("\u00c2\7(\2\2\u00c2\u00c3\5*\26\2\u00c3\u00c4\7)\2\2\u00c4")
+        buf.write("#\3\2\2\2\u00c5\u00c6\7(\2\2\u00c6\u00c7\5*\26\2\u00c7")
+        buf.write("\u00c8\7)\2\2\u00c8%\3\2\2\2\u00c9\u00ca\7\25\2\2\u00ca")
+        buf.write("\u00cb\7,\2\2\u00cb\u00ce\5&\24\2\u00cc\u00ce\7\25\2\2")
+        buf.write("\u00cd\u00c9\3\2\2\2\u00cd\u00cc\3\2\2\2\u00ce\'\3\2\2")
+        buf.write("\2\u00cf\u00d2\5*\26\2\u00d0\u00d2\3\2\2\2\u00d1\u00cf")
+        buf.write("\3\2\2\2\u00d1\u00d0\3\2\2\2\u00d2)\3\2\2\2\u00d3\u00d4")
+        buf.write("\5,\27\2\u00d4\u00d5\7,\2\2\u00d5\u00d6\5*\26\2\u00d6")
+        buf.write("\u00d9\3\2\2\2\u00d7\u00d9\5,\27\2\u00d8\u00d3\3\2\2\2")
+        buf.write("\u00d8\u00d7\3\2\2\2\u00d9+\3\2\2\2\u00da\u00db\5.\30")
+        buf.write("\2\u00db\u00dc\7\'\2\2\u00dc\u00dd\5.\30\2\u00dd\u00e0")
+        buf.write("\3\2\2\2\u00de\u00e0\5.\30\2\u00df\u00da\3\2\2\2\u00df")
+        buf.write("\u00de\3\2\2\2\u00e0-\3\2\2\2\u00e1\u00e2\5\60\31\2\u00e2")
+        buf.write("\u00e3\5<\37\2\u00e3\u00e4\5\60\31\2\u00e4\u00e7\3\2\2")
+        buf.write("\2\u00e5\u00e7\5\60\31\2\u00e6\u00e1\3\2\2\2\u00e6\u00e5")
+        buf.write("\3\2\2\2\u00e7/\3\2\2\2\u00e8\u00e9\b\31\1\2\u00e9\u00ea")
+        buf.write("\5\62\32\2\u00ea\u00f0\3\2\2\2\u00eb\u00ec\f\4\2\2\u00ec")
+        buf.write("\u00ed\t\3\2\2\u00ed\u00ef\5\62\32\2\u00ee\u00eb\3\2\2")
+        buf.write("\2\u00ef\u00f2\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0\u00f1")
+        buf.write("\3\2\2\2\u00f1\61\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f3\u00f4")
+        buf.write("\b\32\1\2\u00f4\u00f5\5\64\33\2\u00f5\u00fb\3\2\2\2\u00f6")
+        buf.write("\u00f7\f\4\2\2\u00f7\u00f8\t\4\2\2\u00f8\u00fa\5\64\33")
+        buf.write("\2\u00f9\u00f6\3\2\2\2\u00fa\u00fd\3\2\2\2\u00fb\u00f9")
+        buf.write("\3\2\2\2\u00fb\u00fc\3\2\2\2\u00fc\63\3\2\2\2\u00fd\u00fb")
+        buf.write("\3\2\2\2\u00fe\u00ff\b\33\1\2\u00ff\u0100\5\66\34\2\u0100")
+        buf.write("\u0106\3\2\2\2\u0101\u0102\f\4\2\2\u0102\u0103\t\5\2\2")
+        buf.write("\u0103\u0105\5\66\34\2\u0104\u0101\3\2\2\2\u0105\u0108")
+        buf.write("\3\2\2\2\u0106\u0104\3\2\2\2\u0106\u0107\3\2\2\2\u0107")
+        buf.write("\65\3\2\2\2\u0108\u0106\3\2\2\2\u0109\u010a\7\30\2\2\u010a")
+        buf.write("\u010d\5\66\34\2\u010b\u010d\58\35\2\u010c\u0109\3\2\2")
+        buf.write("\2\u010c\u010b\3\2\2\2\u010d\67\3\2\2\2\u010e\u010f\7")
+        buf.write("#\2\2\u010f\u0112\58\35\2\u0110\u0112\5:\36\2\u0111\u010e")
+        buf.write("\3\2\2\2\u0111\u0110\3\2\2\2\u01129\3\2\2\2\u0113\u0114")
+        buf.write("\7*\2\2\u0114\u0115\5,\27\2\u0115\u0116\7+\2\2\u0116\u011f")
+        buf.write("\3\2\2\2\u0117\u011f\5$\23\2\u0118\u011f\5\"\22\2\u0119")
+        buf.write("\u011f\5\34\17\2\u011a\u011f\7-\2\2\u011b\u011f\7\24\2")
+        buf.write("\2\u011c\u011f\7\25\2\2\u011d\u011f\7\26\2\2\u011e\u0113")
+        buf.write("\3\2\2\2\u011e\u0117\3\2\2\2\u011e\u0118\3\2\2\2\u011e")
+        buf.write("\u0119\3\2\2\2\u011e\u011a\3\2\2\2\u011e\u011b\3\2\2\2")
+        buf.write("\u011e\u011c\3\2\2\2\u011e\u011d\3\2\2\2\u011f;\3\2\2")
+        buf.write("\2\u0120\u0121\t\6\2\2\u0121=\3\2\2\2\u0122\u0127\7-\2")
+        buf.write("\2\u0123\u0124\7(\2\2\u0124\u0125\5*\26\2\u0125\u0126")
+        buf.write("\7)\2\2\u0126\u0128\3\2\2\2\u0127\u0123\3\2\2\2\u0127")
+        buf.write("\u0128\3\2\2\2\u0128\u0129\3\2\2\2\u0129\u012a\7\27\2")
+        buf.write("\2\u012a\u012b\5,\27\2\u012b?\3\2\2\2\u012c\u012d\7\17")
+        buf.write("\2\2\u012d\u012e\7*\2\2\u012e\u012f\5,\27\2\u012f\u0130")
+        buf.write("\7+\2\2\u0130\u0131\5\b\5\2\u0131\u0132\5R*\2\u0132\u0133")
+        buf.write("\5B\"\2\u0133\u0134\5H%\2\u0134A\3\2\2\2\u0135\u0138\5")
+        buf.write("D#\2\u0136\u0138\3\2\2\2\u0137\u0135\3\2\2\2\u0137\u0136")
+        buf.write("\3\2\2\2\u0138C\3\2\2\2\u0139\u013a\5F$\2\u013a\u013b")
+        buf.write("\5D#\2\u013b\u013e\3\2\2\2\u013c\u013e\5F$\2\u013d\u0139")
+        buf.write("\3\2\2\2\u013d\u013c\3\2\2\2\u013eE\3\2\2\2\u013f\u0140")
+        buf.write("\7\21\2\2\u0140\u0141\7*\2\2\u0141\u0142\5,\27\2\u0142")
+        buf.write("\u0143\7+\2\2\u0143\u0144\5\b\5\2\u0144\u0145\5R*\2\u0145")
+        buf.write("G\3\2\2\2\u0146\u0147\7\20\2\2\u0147\u0148\5\b\5\2\u0148")
+        buf.write("\u0149\5R*\2\u0149\u014c\3\2\2\2\u014a\u014c\3\2\2\2\u014b")
+        buf.write("\u0146\3\2\2\2\u014b\u014a\3\2\2\2\u014cI\3\2\2\2\u014d")
+        buf.write("\u014e\7\5\2\2\u014e\u014f\7-\2\2\u014f\u0150\7\6\2\2")
+        buf.write("\u0150\u0151\5,\27\2\u0151\u0152\7\7\2\2\u0152\u0153\5")
+        buf.write(",\27\2\u0153\u0154\5\b\5\2\u0154\u0155\5R*\2\u0155K\3")
+        buf.write("\2\2\2\u0156\u0157\7\3\2\2\u0157\u015a\5,\27\2\u0158\u015a")
+        buf.write("\7\3\2\2\u0159\u0156\3\2\2\2\u0159\u0158\3\2\2\2\u015a")
+        buf.write("M\3\2\2\2\u015b\u015e\5P)\2\u015c\u015e\3\2\2\2\u015d")
+        buf.write("\u015b\3\2\2\2\u015d\u015c\3\2\2\2\u015eO\3\2\2\2\u015f")
+        buf.write("\u0160\5R*\2\u0160\u0161\5P)\2\u0161\u0164\3\2\2\2\u0162")
+        buf.write("\u0164\5R*\2\u0163\u015f\3\2\2\2\u0163\u0162\3\2\2\2\u0164")
+        buf.write("Q\3\2\2\2\u0165\u0174\5@!\2\u0166\u0174\5J&\2\u0167\u0170")
+        buf.write("\7\b\2\2\u0168\u0170\7\t\2\2\u0169\u0170\5\30\r\2\u016a")
+        buf.write("\u0170\5\f\7\2\u016b\u0170\5\36\20\2\u016c\u0170\5> \2")
+        buf.write("\u016d\u0170\5\34\17\2\u016e\u0170\5L\'\2\u016f\u0167")
+        buf.write("\3\2\2\2\u016f\u0168\3\2\2\2\u016f\u0169\3\2\2\2\u016f")
+        buf.write("\u016a\3\2\2\2\u016f\u016b\3\2\2\2\u016f\u016c\3\2\2\2")
+        buf.write("\u016f\u016d\3\2\2\2\u016f\u016e\3\2\2\2\u0170\u0171\3")
+        buf.write("\2\2\2\u0171\u0172\7/\2\2\u0172\u0174\5\b\5\2\u0173\u0165")
+        buf.write("\3\2\2\2\u0173\u0166\3\2\2\2\u0173\u016f\3\2\2\2\u0174")
+        buf.write("S\3\2\2\2$]agkpx}\u0080\u0084\u008b\u0090\u0098\u00b6")
+        buf.write("\u00bf\u00cd\u00d1\u00d8\u00df\u00e6\u00f0\u00fb\u0106")
+        buf.write("\u010c\u0111\u011e\u0127\u0137\u013d\u014b\u0159\u015d")
+        buf.write("\u0163\u016f\u0173")
+        return buf.getvalue()
+
 
 class ZCodeParser ( Parser ):
 
@@ -276,7 +311,7 @@ class ZCodeParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.13.1")
+        self.checkVersion("4.9.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -303,6 +338,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_program
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitProgram" ):
+                return visitor.visitProgram(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -349,6 +390,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_declaration
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeclaration" ):
+                return visitor.visitDeclaration(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -416,6 +463,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_dclr
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDclr" ):
+                return visitor.visitDclr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -432,11 +485,11 @@ class ZCodeParser ( Parser ):
                 self.state = 95
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [8, 9, 10, 11, 12]:
+                if token in [ZCodeParser.VAR, ZCodeParser.DYNAMIC, ZCodeParser.BOOL_TYPE, ZCodeParser.NUM_TYPE, ZCodeParser.STR_TYPE]:
                     self.state = 93
                     self.var_dclr()
                     pass
-                elif token in [2]:
+                elif token in [ZCodeParser.FUNC]:
                     self.state = 94
                     self.func_dclr()
                     pass
@@ -478,6 +531,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_newline_list
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNewline_list" ):
+                return visitor.visitNewline_list(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -527,6 +586,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_newline_prime
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNewline_prime" ):
+                return visitor.visitNewline_prime(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -597,6 +662,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_var_dclr
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVar_dclr" ):
+                return visitor.visitVar_dclr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -626,11 +697,11 @@ class ZCodeParser ( Parser ):
                 self.state = 118
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [10, 11, 12]:
+                if token in [ZCodeParser.BOOL_TYPE, ZCodeParser.NUM_TYPE, ZCodeParser.STR_TYPE]:
                     self.state = 116
                     self.var_type()
                     pass
-                elif token in [9]:
+                elif token in [ZCodeParser.DYNAMIC]:
                     self.state = 117
                     self.match(ZCodeParser.DYNAMIC)
                     pass
@@ -642,7 +713,7 @@ class ZCodeParser ( Parser ):
                 self.state = 123
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==21:
+                if _la==ZCodeParser.ASSIGN:
                     self.state = 121
                     self.match(ZCodeParser.ASSIGN)
                     self.state = 122
@@ -681,6 +752,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_para_list
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPara_list" ):
+                return visitor.visitPara_list(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -692,12 +769,12 @@ class ZCodeParser ( Parser ):
             self.state = 130
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [10, 11, 12]:
+            if token in [ZCodeParser.BOOL_TYPE, ZCodeParser.NUM_TYPE, ZCodeParser.STR_TYPE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 128
                 self.para_prime()
                 pass
-            elif token in [41]:
+            elif token in [ZCodeParser.CLOSE_BRK]:
                 self.enterOuterAlt(localctx, 2)
 
                 pass
@@ -733,6 +810,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_para_prime
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPara_prime" ):
+                return visitor.visitPara_prime(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -792,6 +875,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_para_dclr
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPara_dclr" ):
+                return visitor.visitPara_dclr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -845,6 +934,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_var_type
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVar_type" ):
+                return visitor.visitVar_type(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -857,7 +952,7 @@ class ZCodeParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 144
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 7168) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ZCodeParser.BOOL_TYPE) | (1 << ZCodeParser.NUM_TYPE) | (1 << ZCodeParser.STR_TYPE))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -903,6 +998,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_func_imp
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFunc_imp" ):
+                return visitor.visitFunc_imp(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -919,11 +1020,11 @@ class ZCodeParser ( Parser ):
             self.state = 150
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [16]:
+            if token in [ZCodeParser.BEGIN]:
                 self.state = 148
                 self.block()
                 pass
-            elif token in [1]:
+            elif token in [ZCodeParser.RETURN]:
                 self.state = 149
                 self.return_stmt()
                 pass
@@ -969,6 +1070,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_block
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBlock" ):
+                return visitor.visitBlock(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1024,6 +1131,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_func_dclr
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFunc_dclr" ):
+                return visitor.visitFunc_dclr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1075,6 +1188,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_func_call
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFunc_call" ):
+                return visitor.visitFunc_call(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1125,6 +1244,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_arr_dclr
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArr_dclr" ):
+                return visitor.visitArr_dclr(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1190,6 +1315,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_array
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArray" ):
+                return visitor.visitArray(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1242,6 +1373,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_arr_acs
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArr_acs" ):
+                return visitor.visitArr_acs(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1301,6 +1438,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_arr_elmt
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArr_elmt" ):
+                return visitor.visitArr_elmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1344,6 +1487,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_num_prime
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNum_prime" ):
+                return visitor.visitNum_prime(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1396,6 +1545,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr_list
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr_list" ):
+                return visitor.visitExpr_list(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1407,12 +1562,12 @@ class ZCodeParser ( Parser ):
             self.state = 207
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [18, 19, 20, 22, 33, 38, 40, 43]:
+            if token in [ZCodeParser.BOOL, ZCodeParser.NUMBER, ZCodeParser.STRING, ZCodeParser.NOT, ZCodeParser.SUB, ZCodeParser.OPEN_IDX, ZCodeParser.OPEN_BRK, ZCodeParser.ID]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 205
                 self.expr_prime()
                 pass
-            elif token in [41]:
+            elif token in [ZCodeParser.CLOSE_BRK]:
                 self.enterOuterAlt(localctx, 2)
 
                 pass
@@ -1448,6 +1603,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr_prime
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr_prime" ):
+                return visitor.visitExpr_prime(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1506,6 +1667,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr" ):
+                return visitor.visitExpr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1563,6 +1730,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr1
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr1" ):
+                return visitor.visitExpr1(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1625,6 +1798,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr2
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr2" ):
+                return visitor.visitExpr2(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
     def expr2(self, _p:int=0):
@@ -1656,7 +1835,7 @@ class ZCodeParser ( Parser ):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 234
                     _la = self._input.LA(1)
-                    if not(_la==23 or _la==24):
+                    if not(_la==ZCodeParser.AND or _la==ZCodeParser.OR):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -1700,6 +1879,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr3
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr3" ):
+                return visitor.visitExpr3(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
     def expr3(self, _p:int=0):
@@ -1731,7 +1916,7 @@ class ZCodeParser ( Parser ):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 245
                     _la = self._input.LA(1)
-                    if not(_la==32 or _la==33):
+                    if not(_la==ZCodeParser.ADD or _la==ZCodeParser.SUB):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -1778,6 +1963,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr4
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr4" ):
+                return visitor.visitExpr4(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
     def expr4(self, _p:int=0):
@@ -1809,7 +2000,7 @@ class ZCodeParser ( Parser ):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 256
                     _la = self._input.LA(1)
-                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 120259084288) != 0)):
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ZCodeParser.MUL) | (1 << ZCodeParser.DIV) | (1 << ZCodeParser.MOD))) != 0)):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -1850,6 +2041,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr5
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr5" ):
+                return visitor.visitExpr5(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1861,14 +2058,14 @@ class ZCodeParser ( Parser ):
             self.state = 266
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [22]:
+            if token in [ZCodeParser.NOT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 263
                 self.match(ZCodeParser.NOT)
                 self.state = 264
                 self.expr5()
                 pass
-            elif token in [18, 19, 20, 33, 38, 40, 43]:
+            elif token in [ZCodeParser.BOOL, ZCodeParser.NUMBER, ZCodeParser.STRING, ZCodeParser.SUB, ZCodeParser.OPEN_IDX, ZCodeParser.OPEN_BRK, ZCodeParser.ID]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 265
                 self.expr6()
@@ -1906,6 +2103,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr6
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr6" ):
+                return visitor.visitExpr6(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1917,14 +2120,14 @@ class ZCodeParser ( Parser ):
             self.state = 271
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [33]:
+            if token in [ZCodeParser.SUB]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 268
                 self.match(ZCodeParser.SUB)
                 self.state = 269
                 self.expr6()
                 pass
-            elif token in [18, 19, 20, 38, 40, 43]:
+            elif token in [ZCodeParser.BOOL, ZCodeParser.NUMBER, ZCodeParser.STRING, ZCodeParser.OPEN_IDX, ZCodeParser.OPEN_BRK, ZCodeParser.ID]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 270
                 self.expr7()
@@ -1984,6 +2187,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_expr7
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpr7" ):
+                return visitor.visitExpr7(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2089,6 +2298,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_cmpr_type
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCmpr_type" ):
+                return visitor.visitCmpr_type(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2101,7 +2316,7 @@ class ZCodeParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 286
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 4261412864) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ZCodeParser.EQUAL) | (1 << ZCodeParser.STR_EQUAL) | (1 << ZCodeParser.NOT_EQUAL) | (1 << ZCodeParser.LESS) | (1 << ZCodeParser.GREATER) | (1 << ZCodeParser.LESS_EQUAL) | (1 << ZCodeParser.GREATER_EQUAL))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2145,6 +2360,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_assgn_expr
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssgn_expr" ):
+                return visitor.visitAssgn_expr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2160,7 +2381,7 @@ class ZCodeParser ( Parser ):
             self.state = 293
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==38:
+            if _la==ZCodeParser.OPEN_IDX:
                 self.state = 289
                 self.match(ZCodeParser.OPEN_IDX)
                 self.state = 290
@@ -2221,6 +2442,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_if_stmt
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIf_stmt" ):
+                return visitor.visitIf_stmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2268,6 +2495,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_elif_list
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitElif_list" ):
+                return visitor.visitElif_list(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2318,6 +2551,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_elif_prime
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitElif_prime" ):
+                return visitor.visitElif_prime(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2385,6 +2624,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_elif_stmt
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitElif_stmt" ):
+                return visitor.visitElif_stmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2435,6 +2680,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_else_stmt
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitElse_stmt" ):
+                return visitor.visitElse_stmt(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2509,6 +2760,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_for_stmt
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFor_stmt" ):
+                return visitor.visitFor_stmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2560,6 +2817,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_return_stmt
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitReturn_stmt" ):
+                return visitor.visitReturn_stmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2609,6 +2872,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_stmt_list
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStmt_list" ):
+                return visitor.visitStmt_list(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2620,12 +2889,12 @@ class ZCodeParser ( Parser ):
             self.state = 347
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 16, 43]:
+            if token in [ZCodeParser.RETURN, ZCodeParser.FOR, ZCodeParser.BREAK, ZCodeParser.CONTINUE, ZCodeParser.VAR, ZCodeParser.DYNAMIC, ZCodeParser.BOOL_TYPE, ZCodeParser.NUM_TYPE, ZCodeParser.STR_TYPE, ZCodeParser.IF, ZCodeParser.BEGIN, ZCodeParser.ID]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 345
                 self.stmt_prime()
                 pass
-            elif token in [17]:
+            elif token in [ZCodeParser.END]:
                 self.enterOuterAlt(localctx, 2)
 
                 pass
@@ -2658,6 +2927,12 @@ class ZCodeParser ( Parser ):
 
         def getRuleIndex(self):
             return ZCodeParser.RULE_stmt_prime
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStmt_prime" ):
+                return visitor.visitStmt_prime(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2749,6 +3024,12 @@ class ZCodeParser ( Parser ):
         def getRuleIndex(self):
             return ZCodeParser.RULE_stmt
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStmt" ):
+                return visitor.visitStmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2760,17 +3041,17 @@ class ZCodeParser ( Parser ):
             self.state = 369
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [13]:
+            if token in [ZCodeParser.IF]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 355
                 self.if_stmt()
                 pass
-            elif token in [3]:
+            elif token in [ZCodeParser.FOR]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 356
                 self.for_stmt()
                 pass
-            elif token in [1, 6, 7, 8, 9, 10, 11, 12, 16, 43]:
+            elif token in [ZCodeParser.RETURN, ZCodeParser.BREAK, ZCodeParser.CONTINUE, ZCodeParser.VAR, ZCodeParser.DYNAMIC, ZCodeParser.BOOL_TYPE, ZCodeParser.NUM_TYPE, ZCodeParser.STR_TYPE, ZCodeParser.BEGIN, ZCodeParser.ID]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 365
                 self._errHandler.sync(self)

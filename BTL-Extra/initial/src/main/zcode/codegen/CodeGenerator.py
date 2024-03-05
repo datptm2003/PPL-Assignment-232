@@ -13,16 +13,19 @@ from Emitter import Emitter
 from Frame import Frame
 from abc import ABC, abstractmethod
 
+def retrieveType(origin):
+    return ArrayPointerType(origin.eleType) if type(origin) is ArrayType else origin
+
 class CodeGenerator(Utils):
     def __init__(self):
         self.libName = "io"
 
     def init(self):
-        return [Symbol("getInt", MType(list(), IntegerType()), CName(self.libName)),
-                    Symbol("putInt", MType([IntegerType()], VoidType()), CName(self.libName)),
-                    Symbol("putIntLn", MType([IntegerType()], VoidType()), CName(self.libName))
-                    
-                    ]
+        return  [
+            Symbol("getInt", MType([],NumberType()), CName(self.libName)),
+            Symbol("putInt", MType([NumberType()],None), CName(self.libName)),
+            Symbol("putIntLn", MType([NumberType()],None), CName(self.libName))            
+        ]
 
     def gen(self, ast, dir_):
         #ast: AST
@@ -46,10 +49,11 @@ class ArrayPointerType(Type):
         self.eleType = ctype
 
     def __str__(self):
-        return "ArrayPointerType({0})".format(str(self.eleType))
+        return "ArrayPointType({0})".format(str(self.eleType))
 
     def accept(self, v, param):
         return None
+    
 class ClassType(Type):
     def __init__(self,cname):
         self.cname = cname
@@ -105,32 +109,31 @@ class CodeGenVisitor(BaseVisitor, Utils):
         self.path = dir_
         self.emit = Emitter(self.path + "/" + self.className + ".j")
 
-    def visitProgram(self, ast, c):
+    def visitProgram(self, ast: Program, ctxt):
         #ast: Program
         #c: Any
 
         self.emit.printout(self.emit.emitPROLOG(self.className, "java.lang.Object"))
         e = SubBody(None, self.env)
-        for x in ast.decls:
+        for x in ast.decl:
             e = self.visit(x, e)
         # generate default constructor
-        self.genMETHOD(FuncDecl("<init>", None, list(), None, BlockStmt( list())), c, Frame("<init>", VoidType))
+        self.genMETHOD(FuncDecl("<init>", [], Block([])), ctxt, Frame("<init>"))
         self.emit.emitEPILOG()
-        return c
+        return ctxt
 
-    def genMETHOD(self, consdecl, o, frame):
+    def genMETHOD(self, dclr: FuncDecl, o: List[Symbol], frame):
         #consdecl: FuncDecl
         #o: Any
         #frame: Frame
 
-        isInit = consdecl.return_type is None
-        isMain = consdecl.name == "main" and len(consdecl.params) == 0 and type(consdecl.return_type) is VoidType
-        returnType = VoidType() if isInit else consdecl.return_type
-        methodName = "<init>" if isInit else consdecl.name
-        intype = [ArrayPointerType(StringType())] if isMain else list()
-        mtype = MType(intype, returnType)
+        isInit = (dclr.name == "<init>")
+        isMain = (dclr.name == "main" and len(dclr.param) == 0)
+        methodName = "<init>" if isInit else dclr.name
+        intype = [ArrayPointerType(StringType())] if isMain else [retrieveType(x.varType) for x in dclr.param]
+        mtype = MType(intype, None)
 
-        self.emit.printout(self.emit.emitMETHOD(methodName, mtype, not isInit, frame))
+        self.emit.printout(self.emit.emitMETHOD(methodName, mtype, not isInit, frame)) # Need handle mtype
 
         frame.enterScope(True)
 
@@ -142,55 +145,67 @@ class CodeGenVisitor(BaseVisitor, Utils):
         if isMain:
             self.emit.printout(self.emit.emitVAR(frame.getNewIndex(), "args", ArrayPointerType(StringType()), frame.getStartLabel(), frame.getEndLabel(), frame))
 
-        body = consdecl.body
+        body = dclr.body
         self.emit.printout(self.emit.emitLABEL(frame.getStartLabel(), frame))
 
         # Generate code for statements
         if isInit:
             self.emit.printout(self.emit.emitREADVAR("this", ClassType(self.className), 0, frame))
             self.emit.printout(self.emit.emitINVOKESPECIAL(frame))
-        list(map(lambda x: self.visit(x, SubBody(frame, glenv)), body.body))
+        list(map(lambda x: self.visit(x, SubBody(frame, glenv)), body.stmt))
 
         self.emit.printout(self.emit.emitLABEL(frame.getEndLabel(), frame))
-        if type(returnType) is VoidType:
-            self.emit.printout(self.emit.emitRETURN(VoidType(), frame))
-        self.emit.printout(self.emit.emitENDMETHOD(frame))
-        frame.exitScope();
 
-    def visitFuncDecl(self, ast, o):
+        # if type(returnType) is VoidType:
+        self.emit.printout(self.emit.emitRETURN(None, frame))
+
+        self.emit.printout(self.emit.emitENDMETHOD(frame))
+        frame.exitScope()
+
+        
+
+    def visitFuncDecl(self, ast: FuncDecl, o):
         #ast: FuncDecl
         #o: Any
 
         subctxt = o
-        frame = Frame(ast.name, ast.return_type)
+        frame = Frame(ast.name)
         self.genMETHOD(ast, subctxt.sym, frame)
-        return SubBody(None, [Symbol(ast.name, MType(list(), ast.return_type), CName(self.className))] + subctxt.sym)
+        return SubBody(None, [Symbol(ast.name, [], CName(self.className))] + subctxt.sym)
 
-    def visitFuncCall(self, ast, o):
-        #ast: FuncCall
-        #o: Any
-
+    def visitCallStmt(self, ast: CallStmt, o: SubBody):
         ctxt = o
         frame = ctxt.frame
         nenv = ctxt.sym
         sym = self.lookup(ast.name, nenv, lambda x: x.name)
         cname = sym.value.value
-    
         ctype = sym.mtype
+        # print(ctype)
 
         in_ = ("", list())
         for x in ast.args:
-            str1, typ1 = self.visit(x, Access(frame, nenv, False, True))
-            in_ = (in_[0] + str1, in_[1].append(typ1))
+            parCode, parType = self.visit(x, Access(frame, nenv, False, True))
+            in_ = (in_[0] + parCode, in_[1].append(parType))
         self.emit.printout(in_[0])
         self.emit.printout(self.emit.emitINVOKESTATIC(cname + "/" + ast.name, ctype, frame))
 
-    def visitIntegerLit(self, ast, o):
-        #ast: IntLiteral
+    def visitBinaryOp(self, ast: BinaryOp, o):
+        ctxt = o
+        frame = ctxt.frame
+        op = ast.op
+
+        if op == '+':
+            lcode = self.visit(ast.left, ctxt)
+            rcode = self.visit(ast.right, ctxt)
+
+            return lcode + rcode + self.emit.emitADDOP(op, NumberType(), frame), NumberType()
+
+
+    def visitNumberLiteral(self, ast: NumberLiteral, o):
         #o: Any
 
         ctxt = o
         frame = ctxt.frame
-        return self.emit.emitPUSHICONST(ast.val, frame), IntegerType()
+        return self.emit.emitPUSHICONST(ast.value, frame)
 
     

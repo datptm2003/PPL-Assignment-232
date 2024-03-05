@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod, ABCMeta
+# from Visitor import Visitor
+from dataclasses import dataclass
 from typing import List, Tuple
 
 
@@ -13,280 +15,293 @@ class AST(ABC):
 
 
 class Stmt(AST):
+    __metaclass__ = ABCMeta
     pass
 
 
-class Expr(Stmt):
+class Expr(AST):
+    __metaclass__ = ABCMeta
+    pass
+
+
+class LHS(Expr):
+    __metaclass__ = ABCMeta
     pass
 
 
 class Type(AST):
+    __metaclass__ = ABCMeta
     pass
 
 
 class Decl(AST):
-    pass
-
-# Types
-
-
-class AtomicType(Type):
+    __metaclass__ = ABCMeta
     pass
 
 
-class IntegerType(AtomicType):
-    def __str__(self):
-        return self.__class__.__name__
-
-
-class FloatType(AtomicType):
-    def __str__(self):
-        return self.__class__.__name__
-
-
-class BooleanType(AtomicType):
-    def __str__(self):
-        return self.__class__.__name__
-
-
-class StringType(AtomicType):
-    def __str__(self):
-        return self.__class__.__name__
-
-
-class ArrayType(Type):
-    def __init__(self, dimensions: List[int], typ: AtomicType):
-        self.dimensions = dimensions
-        self.typ = typ
+class Id(LHS):
+    # name: str
+    def __init__(self, name):
+        self.name = name
 
     def __str__(self):
-        return "ArrayType([{}], {})".format(", ".join([dimen for dimen in self.dimensions]), str(self.typ))
+        return f"Id({self.name})"
 
 
-class AutoType(Type):
-    def __str__(self):
-        return self.__class__.__name__
+# used for binary expression
+class BinaryOp(Expr):
+    # op: str
+    # left: Expr
+    # right: Expr
 
-
-class VoidType(Type):
-    def __str__(self):
-        return self.__class__.__name__
-
-
-# Expressions
-
-class LHS(Expr):
-    pass
-
-
-class BinExpr(Expr):
-    def __init__(self, op: str, left: Expr, right: Expr):
+    def __init__(self, op, left, right):
         self.op = op
         self.left = left
         self.right = right
 
     def __str__(self):
-        return "BinExpr({}, {}, {})".format(self.op, str(self.left), str(self.right))
+        return f"BinaryOp({self.op}, {str(self.left)}, {str(self.right)})"
 
 
-class UnExpr(Expr):
-    def __init__(self, op: str, val: Expr):
-        self.op = str
-        self.val = val
+# used for unary expression with orerand like !,+,-
+class UnaryOp(Expr):
+    # op: str
+    # operand: Expr
 
-    def __str__(self):
-        return "UnExpr({}, {})".format(self.op, str(self.val))
-
-
-class Id(LHS):
-    def __init__(self, name: str):
-        self.name = name
+    def __init__(self, op, operand):
+        self.op = op
+        self.operand = operand
 
     def __str__(self):
-        return "Id({})".format(self.name)
+        return f"UnaryOp({self.op}, {str(self.operand)})"
 
 
-class ArrayCell(LHS):
-    def __init__(self, name: str, cell: List[Expr]):
-        self.name = name
-        self.cell = cell
+class CallExpr(Expr):
+    # name: Id
+    # args: List[Expr]
 
-    def __str__(self):
-        return "ArrayCell({}, [{}])".format(self.name, ", ".join([str(expr) for expr in self.cell]))
-
-
-class IntegerLit(Expr):
-    def __init__(self, val: int):
-        self.val = val
-
-    def __str__(self):
-        return "IntegerLit({})".format(self.val)
-
-
-class FloatLit(Expr):
-    def __init__(self, val: float):
-        self.val = val
-
-    def __str__(self):
-        return "FloatLit({})".format(self.val)
-
-
-class StringLit(Expr):
-    def __init__(self, val: str):
-        self.val = val
-
-
-class BooleanLit(Expr):
-    def __init__(self, val: bool):
-        self.val = val
-
-    def __str__(self):
-        return "BooleanLit({})".format("True" if self.val else "False")
-
-
-class ArrayLit(Expr):
-    def __init__(self, explist: List[Expr]):
-        self.explist = explist
-
-    def __str__(self):
-        return "ArrayLit([{}])".format(", ".join([self.visit(exp) for exp in self.explist]))
-
-
-class FuncCall(Expr):
-    def __init__(self, name: str, args: List[Expr]):
+    def __init__(self, name, args):
         self.name = name
         self.args = args
 
     def __str__(self):
-        return "FuncCall({}, [{}])".format(self.name, ", ".join([str(expr) for expr in self.args]))
+        return f"CallExpr({str(self.name)}, [{', '.join(str(i) for i in self.args)}])"
 
 
-# Statements
+class ArrayCell(LHS):
+    # arr: Expr
+    # idx: List[Expr]
 
-class AssignStmt(Stmt):
-    def __init__(self, lhs: LHS, rhs: Expr):
+    def __init__(self, arr, idx):
+        self.arr = arr
+        self.idx = idx
+
+    def __str__(self):
+        return f"ArrayCell({str(self.arr)}, [{', '.join(str(i) for i in self.idx)}])"
+
+
+class Literal(Expr):
+    __metaclass__ = ABCMeta
+    pass
+
+
+class NumberLiteral(Literal):
+    # value: float
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return f"NumLit({str(self.value)})"
+
+
+class StringLiteral(Literal):
+    # value: str
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return f"StringLit({self.value})"
+
+
+class BooleanLiteral(Literal):
+    # value: bool
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return f"BooleanLit({'True' if self.value else 'False'})"
+
+
+@dataclass
+class ArrayLiteral(Literal):
+    # value: List[Expr]
+
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return f"ArrayLit({', '.join(str(i) for i in self.value)})"
+
+
+class Decl(AST):
+    __metaclass__ = ABCMeta
+    pass
+
+
+class Assign(Stmt):
+    # lhs: Expr
+    # exp: Expr
+
+    def __init__(self, lhs, rhs):
         self.lhs = lhs
         self.rhs = rhs
 
     def __str__(self):
-        return "AssignStmt({}, {})".format(str(self.lhs), self.rhs)
+        return f"AssignStmt({str(self.lhs)}, {str(self.rhs)})"
 
 
-class BlockStmt(Stmt):
-    def __init__(self, body: List[Stmt or VarDecl]):
+class If(Stmt):
+    # expr: Expr
+    # thenStmt: Stmt
+    # elifStmt: List[Tuple[Expr, Stmt]] # empty list if there is no elif statement
+    # elseStmt: Stmt = None  # None if there is no else branch
+
+    def __init__(self, expr, thenStmt, elifStmt=[], elseStmt=None):
+        self.expr = expr
+        self.thenStmt = thenStmt
+        self.elifStmt = elifStmt
+        self.elseStmt = elseStmt
+
+    def __str__(self):
+        return f"If(({str(self.expr)}, {str(self.thenStmt)}), [{', '.join(f'({str(x[0])}, {str(x[1])})' for x in self.elifStmt)}], {str(self.elseStmt) if self.elseStmt else 'None'})"
+
+
+class For(Stmt):
+    # name: Id
+    # condExpr: Expr
+    # updExpr: Expr
+    # body: Stmt
+
+    def __init__(self, name, condExpr, updExpr, body):
+        self.name = name
+        self.condExpr = condExpr
+        self.updExpr = updExpr
         self.body = body
 
     def __str__(self):
-        return "BlockStmt([{}])".format(", ".join([str(body) for body in self.body]))
+        return f"For({str(self.name)}, {str(self.condExpr)}, {str(self.updExpr)}, {str(self.body)})"
 
 
-class IfStmt(Stmt):
-    def __init__(self, cond: Expr, tstmt: Stmt, fstmt: Stmt or None = None):
-        self.cond = cond
-        self.tstmt = tstmt
-        self.fstmt = fstmt
-
+class Break(Stmt):
     def __str__(self):
-        return "IfStmt({}, {}{})".format(str(self.cond), str(self.tstmt), ", " + str(self.fstmt) if self.fstmt else "")
+        return "Break"
 
 
-class ForStmt(Stmt):
-    def __init__(self, init: AssignStmt, cond: Expr, upd: Expr, stmt: Stmt):
-        self.init = init
-        self.cond = cond
-        self.upd = upd
-        self.stmt = stmt
-
+class Continue(Stmt):
     def __str__(self):
-        return "ForStmt({}, {}, {}, {})".format(str(self.init), str(self.cond), str(self.upd), str(self.stmt))
+        return "Continue"
 
 
-class WhileStmt(Stmt):
-    def __init__(self, cond: Expr, stmt: Stmt):
-        self.cond = cond
-        self.stmt = stmt
+class Return(Stmt):
+    # expr: Expr = None  # None if there is no expression after return
 
-    def __str__(self):
-        return "WhileStmt({}, {})".format(str(self.cond), str(self.stmt))
-
-
-class DoWhileStmt(Stmt):
-    def __init__(self, cond: Expr, stmt: BlockStmt):
-        self.cond = cond
-        self.stmt = stmt
-
-    def __str__(self):
-        return "DoWhileStmt({}, {})".format(str(self.cond), str(self.stmt))
-
-
-class BreakStmt(Stmt):
-    def __str__(self):
-        return "BreakStmt()"
-
-
-class ContinueStmt(Stmt):
-    def __str__(self):
-        return "ContinueStmt()"
-
-
-class ReturnStmt(Stmt):
-    def __init__(self, expr: Expr or None = None):
+    def __init__(self, expr=None):
         self.expr = expr
 
     def __str__(self):
-        return "ReturnStmt({})".format(str(self.expr) if self.expr else "")
+        return f"Return({str(self.expr) if self.expr else ''})"
 
 
 class CallStmt(Stmt):
-    def __init__(self, name: str, args: List[Expr]):
+    # name: Id
+    # args: List[Expr]  # empty list if there is no argument
+
+    def __init__(self, name, args):
         self.name = name
         self.args = args
 
     def __str__(self):
-        return "CallStmt({}, {})".format(self.name, ", ".join([str(expr) for expr in self.args]))
+        return f"CallStmt({str(self.name)}, [{', '.join(str(i) for i in self.args)}])"
 
 
-# Declarations
+class Block(Stmt):
+    # stmt: List[Stmt]  # empty list if there is no statement in block
 
-
-class VarDecl(Decl):
-    def __init__(self, name: str, typ: Type, init: Expr or None = None):
-        self.name = name
-        self.typ = typ
-        self.init = init
+    def __init__(self, stmt):
+        self.stmt = stmt
 
     def __str__(self):
-        return "VarDecl({}, {}{})".format(self.name, str(self.typ), ", " + str(self.init) if self.init else "")
+        return f"Block([{', '.join(str(i) for i in self.stmt)}])"
 
 
-class ParamDecl(Decl):
-    def __init__(self, name: str, typ: Type, out: bool = False, inherit: bool = False):
+# used for variable or parameter declaration
+class VarDecl(Decl, Stmt):
+    # name: Id
+    # varType: Type = None  # None if there is no type
+    # modifier: str = None  # None if there is no modifier
+    # varInit: Expr = None  # None if there is no initial
+
+    def __init__(self, name, varType=None, modifier=None, varInit=None):
         self.name = name
-        self.typ = typ
-        self.out = out
-        self.inherit = inherit
+        self.varType = varType
+        self.modifier = modifier
+        self.varInit = varInit
 
     def __str__(self):
-        return "{}{}Param({}, {})".format("Inherit" if self.inherit else "", "Out" if self.out else "", self.name, str(self.typ))
+        return f"VarDecl({str(self.name)}, {str(self.varType) if self.varType else 'None'}, {str(self.modifier) if self.modifier else 'None'}, {str(self.varInit) if self.varInit else 'None'})"
 
 
+# used for a function declaration
 class FuncDecl(Decl):
-    def __init__(self, name: str, return_type: Type, params: List[ParamDecl], inherit: str or None, body: BlockStmt):
+    # name: Id
+    # param: List[VarDecl]  # empty list if there is no parameter
+    # body: Stmt = None  # None if this is just a declaration-part
+
+    def __init__(self, name, param, body=None):
         self.name = name
-        self.return_type = return_type
-        self.params = params
-        self.inherit = inherit
+        self.param = param
         self.body = body
 
     def __str__(self):
-        return "FuncDecl({}, {}, [{}], {}, {})".format(self.name, str(self.return_type), ", ".join([str(param) for param in self.params]), self.inherit if self.inherit else "None", str(self.body))
-
-# Program
+        return f"FuncDecl({str(self.name)}, [{', '.join(str(i) for i in self.param)}], {str(self.body) if self.body else 'None'})"
 
 
-class Program(AST):
-    def __init__(self, decls: List[Decl]):
-        self.decls = decls
+class NumberType(Type):
+    def __str__(self):
+        return "NumberType"
+
+
+class BoolType(Type):
+    def __str__(self):
+        return "BoolType"
+
+
+class StringType(Type):
+    def __str__(self):
+        return "StringType"
+
+
+class ArrayType(Type):
+    # size: List[float]
+    # eleType: Type
+
+    def __init__(self, size, eleType):
+        self.size = size
+        self.eleType = eleType
 
     def __str__(self):
-        return "Program([\n\t{}\n])".format("\n\t".join([str(decl) for decl in self.decls]))
+        return f"ArrayType([{', '.join(str(i) for i in self.size)}], {str(self.eleType)})"
+
+
+# used for whole program
+class Program(AST):
+    # decl: List[Decl]  # empty list if there is no statement in block
+
+    def __init__(self, decl):
+        self.decl = decl
+
+    def __str__(self):
+        return f"Program([{', '.join(str(i) for i in self.decl)}])"
