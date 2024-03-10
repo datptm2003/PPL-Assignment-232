@@ -1,2 +1,0 @@
-func foo(string str)
-var x <- 7 + (t - false)

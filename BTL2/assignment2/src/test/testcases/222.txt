@@ -1,6 +1,0 @@
-func foo(number num)
-
-func bar(number x[2])
-begin ## begin
-var x <- y + "abc"
-end

@@ -1,3 +1,0 @@
-func main(string x, number y)  
-begin
-end

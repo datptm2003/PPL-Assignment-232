@@ -1,5 +1,0 @@
-func key(boolean b)
-begin
-bool b <- 7
-return b and b
-end

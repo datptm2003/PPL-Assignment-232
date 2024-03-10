@@ -1,2 +1,0 @@
-## Helper function
-func getVar(number x, bool b0)

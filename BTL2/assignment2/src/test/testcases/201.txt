@@ -1,2 +1,0 @@
-func _main_() begin
-end

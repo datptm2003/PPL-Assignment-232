@@ -1,9 +1,0 @@
-func foo(number num)
-
-func bar(string str)   
-
-begin ## begin
-var x <- y + "abc"
-end
-
-dynamic y

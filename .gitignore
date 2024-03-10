@@ -8,6 +8,8 @@
 /BTL1/assignment1/src/main/zcode/parser/ZCodeParser.py
 /BTL1/assignment1/src/main/zcode/parser/ZCodeVisitor.py
 /BTL2/assignment2/src/main/zcode/parser/__pycache__
+/BTL2/assignment2/src/main/zcode/astgen/__pycache__
+/BTL2/assignment2/src/main/zcode/utils/__pycache__
 /BTL2/assignment2/src/test/__pycache__
 /BTL2/assignment2/src/main/zcode/parser/ZCode.interp
 /BTL2/assignment2/src/main/zcode/parser/ZCode.tokens

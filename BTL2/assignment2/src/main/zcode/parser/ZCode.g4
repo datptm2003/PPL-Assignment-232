@@ -35,7 +35,8 @@ block:			BEGIN NEWLINE newline_list stmt_list END;
 
 func_dclr: 		FUNC ID OPEN_BRK para_list CLOSE_BRK;
 
-func_call:		ID OPEN_BRK expr_list CLOSE_BRK;
+func_call_stmt:		ID OPEN_BRK expr_list CLOSE_BRK;
+func_call_expr:		ID OPEN_BRK expr_list CLOSE_BRK;
 
 // main_imp: 		FUNC MAIN OPEN_BRK CLOSE_BRK newline_list main_block;
 // main_block:		BEGIN newline_list stmt_list END;
@@ -43,7 +44,7 @@ func_call:		ID OPEN_BRK expr_list CLOSE_BRK;
 arr_dclr:		var_type array ASSIGN expr | var_type array;
 array:			ID OPEN_IDX num_prime CLOSE_IDX;
 
-arr_acs:		(ID | func_call) OPEN_IDX expr_prime CLOSE_IDX;
+arr_acs:		(ID | func_call_expr) OPEN_IDX expr_prime CLOSE_IDX;
 
 // elmt_prime:		elmt SEP elmt_prime | elmt;
 // elmt:			arr_elmt | expr;
@@ -82,7 +83,7 @@ expr6:			SUB expr6 | expr7;
 expr7:			OPEN_BRK expr CLOSE_BRK
 				| arr_elmt
 				| arr_acs
- 				| func_call
+ 				| func_call_expr
 				| ID
  				| BOOL | NUMBER | STRING;
 				
@@ -130,9 +131,9 @@ assgn_expr:		ID (OPEN_IDX expr_prime CLOSE_IDX)? ASSIGN expr;
 // for_stmt:		FOR ID UNTIL logic_expr BY arith_expr NEWLINE? loop_body;
 // loop_body:		stmt | (BREAK | CONTINUE | return_stmt | block) NEWLINE;
 
-if_stmt:		IF OPEN_BRK expr CLOSE_BRK newline_list stmt elif_list else_stmt;
-elif_list:		elif_prime | ;
-elif_prime:		elif_stmt elif_prime | elif_stmt;
+if_stmt:		IF OPEN_BRK expr CLOSE_BRK newline_list stmt elif_prime else_stmt;
+// elif_list:		elif_prime | ;
+elif_prime:		elif_stmt elif_prime | ;
 elif_stmt:		ELIF OPEN_BRK expr CLOSE_BRK newline_list stmt;
 else_stmt:		ELSE newline_list stmt | ;
 
@@ -151,8 +152,9 @@ stmt: 			if_stmt
 				| arr_dclr 
 				| assgn_expr
 				// | arr_assgn
-				| func_call
+				| func_call_stmt
 				| return_stmt) NEWLINE newline_list;
+
 
 // read_io:        read_type OPEN_BRK CLOSE_BRK;
 // read_type:		READ_NUM | READ_BOOL | READ_STR;

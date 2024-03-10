@@ -1,6 +1,0 @@
-func foo(number num)
-
-func bar(number x <- 6)
-begin ## begin
-var x <- x + 6
-end

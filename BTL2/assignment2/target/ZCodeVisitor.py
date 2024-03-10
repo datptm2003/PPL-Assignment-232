@@ -74,8 +74,13 @@ class ZCodeVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ZCodeParser#func_call.
-    def visitFunc_call(self, ctx:ZCodeParser.Func_callContext):
+    # Visit a parse tree produced by ZCodeParser#func_call_stmt.
+    def visitFunc_call_stmt(self, ctx:ZCodeParser.Func_call_stmtContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ZCodeParser#func_call_expr.
+    def visitFunc_call_expr(self, ctx:ZCodeParser.Func_call_exprContext):
         return self.visitChildren(ctx)
 
 
@@ -166,11 +171,6 @@ class ZCodeVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ZCodeParser#if_stmt.
     def visitIf_stmt(self, ctx:ZCodeParser.If_stmtContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ZCodeParser#elif_list.
-    def visitElif_list(self, ctx:ZCodeParser.Elif_listContext):
         return self.visitChildren(ctx)
 
 

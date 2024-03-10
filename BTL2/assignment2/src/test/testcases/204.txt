@@ -1,3 +1,0 @@
-
-
-var const <- 4 ## declare variable

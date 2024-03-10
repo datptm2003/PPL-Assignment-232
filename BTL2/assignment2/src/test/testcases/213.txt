@@ -1,4 +1,0 @@
-func foo(string str) begin
-begin
-writeString(str)
-end
