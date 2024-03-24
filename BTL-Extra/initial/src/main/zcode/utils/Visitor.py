@@ -7,15 +7,11 @@ class Visitor(ABC):
         return ast.accept(self, param)
 
     @abstractmethod
-    def visitFloatType(self, ast, param):
+    def visitNumberType(self, ast, param):
         pass
 
     @abstractmethod
-    def visitIntegerType(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitBooleanType(self, ast, param):
+    def visitBoolType(self, ast, param):
         pass
 
     @abstractmethod
@@ -27,19 +23,11 @@ class Visitor(ABC):
         pass
 
     @abstractmethod
-    def visitAutoType(self, ast, param):
+    def visitBinaryOp(self, ast, param):
         pass
 
     @abstractmethod
-    def visitVoidType(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitBinExpr(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitUnExpr(self, ast, param):
+    def visitUnaryOp(self, ast, param):
         pass
 
     @abstractmethod
@@ -51,63 +39,51 @@ class Visitor(ABC):
         pass
 
     @abstractmethod
-    def visitIntegerLit(self, ast, param):
+    def visitNumberLiteral(self, ast, param):
         pass
 
     @abstractmethod
-    def visitFloatLit(self, ast, param):
+    def visitStringLiteral(self, ast, param):
         pass
 
     @abstractmethod
-    def visitStringLit(self, ast, param):
+    def visitBooleanLiteral(self, ast, param):
         pass
 
     @abstractmethod
-    def visitBooleanLit(self, ast, param):
+    def visitArrayLiteral(self, ast, param):
         pass
 
     @abstractmethod
-    def visitArrayLit(self, ast, param):
+    def visitCallExpr(self, ast, param):
         pass
 
     @abstractmethod
-    def visitFuncCall(self, ast, param):
+    def visitAssign(self, ast, param):
         pass
 
     @abstractmethod
-    def visitAssignStmt(self, ast, param):
+    def visitBlock(self, ast, param):
         pass
 
     @abstractmethod
-    def visitBlockStmt(self, ast, param):
+    def visitIf(self, ast, param):
         pass
 
     @abstractmethod
-    def visitIfStmt(self, ast, param):
+    def visitFor(self, ast, param):
         pass
 
     @abstractmethod
-    def visitForStmt(self, ast, param):
+    def visitBreak(self, ast, param):
         pass
 
     @abstractmethod
-    def visitWhileStmt(self, ast, param):
+    def visitContinue(self, ast, param):
         pass
 
     @abstractmethod
-    def visitDoWhileStmt(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitBreakStmt(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitContinueStmt(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitReturnStmt(self, ast, param):
+    def visitReturn(self, ast, param):
         pass
 
     @abstractmethod
@@ -116,10 +92,6 @@ class Visitor(ABC):
 
     @abstractmethod
     def visitVarDecl(self, ast, param):
-        pass
-
-    @abstractmethod
-    def visitParamDecl(self, ast, param):
         pass
 
     @abstractmethod
@@ -132,15 +104,12 @@ class Visitor(ABC):
 
 class BaseVisitor(Visitor):
 
-    def visitFloatType(self, ast, param):
+    
+    def visitNumberType(self, ast, param):
         pass
 
     
-    def visitIntegerType(self, ast, param):
-        pass
-
-    
-    def visitBooleanType(self, ast, param):
+    def visitBoolType(self, ast, param):
         pass
 
     
@@ -152,19 +121,11 @@ class BaseVisitor(Visitor):
         pass
 
     
-    def visitAutoType(self, ast, param):
+    def visitBinaryOp(self, ast, param):
         pass
 
     
-    def visitVoidType(self, ast, param):
-        pass
-
-    
-    def visitBinExpr(self, ast, param):
-        pass
-
-    
-    def visitUnExpr(self, ast, param):
+    def visitUnaryOp(self, ast, param):
         pass
 
     
@@ -176,63 +137,51 @@ class BaseVisitor(Visitor):
         pass
 
     
-    def visitIntegerLit(self, ast, param):
+    def visitNumberLiteral(self, ast, param):
         pass
 
     
-    def visitFloatLit(self, ast, param):
+    def visitStringLiteral(self, ast, param):
         pass
 
     
-    def visitStringLit(self, ast, param):
+    def visitBooleanLiteral(self, ast, param):
         pass
 
     
-    def visitBooleanLit(self, ast, param):
+    def visitArrayLiteral(self, ast, param):
         pass
 
     
-    def visitArrayLit(self, ast, param):
+    def visitCallExpr(self, ast, param):
         pass
 
     
-    def visitFuncCall(self, ast, param):
+    def visitAssign(self, ast, param):
         pass
 
     
-    def visitAssignStmt(self, ast, param):
+    def visitBlock(self, ast, param):
         pass
 
     
-    def visitBlockStmt(self, ast, param):
+    def visitIf(self, ast, param):
         pass
 
     
-    def visitIfStmt(self, ast, param):
+    def visitFor(self, ast, param):
         pass
 
     
-    def visitForStmt(self, ast, param):
+    def visitBreak(self, ast, param):
         pass
 
     
-    def visitWhileStmt(self, ast, param):
+    def visitContinue(self, ast, param):
         pass
 
     
-    def visitDoWhileStmt(self, ast, param):
-        pass
-
-    
-    def visitBreakStmt(self, ast, param):
-        pass
-
-    
-    def visitContinueStmt(self, ast, param):
-        pass
-
-    
-    def visitReturnStmt(self, ast, param):
+    def visitReturn(self, ast, param):
         pass
 
     
@@ -244,14 +193,9 @@ class BaseVisitor(Visitor):
         pass
 
     
-    def visitParamDecl(self, ast, param):
-        pass
-
-    
     def visitFuncDecl(self, ast, param):
         pass
 
     
     def visitProgram(self, ast, param):
         pass
-
