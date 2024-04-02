@@ -14,6 +14,7 @@ from StaticError import *
 from CodeGenerator import CodeGenerator
 import subprocess
 
+MIPS_JAR = "./external/Mars4_5.jar"
 JASMIN_JAR = "./external/jasmin.jar"
 TEST_DIR = "./test/testcases/"
 SOL_DIR = "./test/solutions/"
@@ -180,10 +181,13 @@ class TestCodeGen():
         f = open(os.path.join(soldir, str(num) + ".txt"),"w")
         try:
             codeGen.gen(asttree, path)
-            
-            subprocess.call("java  -jar "+ JASMIN_JAR + " " + path + "/ZCodeClass.j",shell=True,stderr=subprocess.STDOUT)
-            cmd = "java -cp ./lib" + os.pathsep +". ZCodeClass"
-            subprocess.run(cmd,shell=True, stdout = f, timeout=10)
+     
+            # For MIPS code
+            proc = subprocess.run("java  -jar "+ MIPS_JAR + " " + path + "/ZCodeClass.asm",shell=True,stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+            output = proc.stdout.decode('utf-8')
+            lines = output.splitlines()
+            f.write('\n'.join(lines[2:]))
+
         except StaticError as e:
             f.write(str(e))
         except subprocess.TimeoutExpired:

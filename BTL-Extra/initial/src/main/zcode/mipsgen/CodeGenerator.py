@@ -190,22 +190,30 @@ class CodeGenVisitor(BaseVisitor, Utils):
         self.emit.printout(self.emit.emitINVOKESTATIC(cname + "/" + ast.name, ctype, frame))
 
     def visitBinaryOp(self, ast: BinaryOp, o):
-        ctxt = o
-        frame = ctxt.frame
         op = ast.op
+        text = ""
 
         if op == '+':
-            lcode = self.visit(ast.left, ctxt)
-            rcode = self.visit(ast.right, ctxt)
+            lcode, lreg = self.visit(ast.left, o)
+            if lreg == "$sp":
+                lcode = self.emit.popWORD("$t0",o) + lcode
+                lreg = "$t0"
 
-            return lcode + rcode + self.emit.emitADDOP(op, NumberType(), frame), NumberType()
+            text += lcode + self.emit.emitADDOP("$s0",lreg,0)
+
+            rcode, rreg = self.visit(ast.right, o)
+            if rreg == "$sp":
+                rcode = self.emit.popWORD("$t0",o) + rcode
+                rreg = "$t0"
+
+            text += rcode + self.emit.emitADDOP("$s0",rreg,0)
+
+            return text,"$s0"
 
 
     def visitNumberLiteral(self, ast: NumberLiteral, o):
         #o: Any
 
-        ctxt = o
-        frame = ctxt.frame
-        return self.emit.emitPUSHICONST(ast.value, frame)
+        return self.emit.emitNUMBERLITERAL(ast.value, o)
 
     

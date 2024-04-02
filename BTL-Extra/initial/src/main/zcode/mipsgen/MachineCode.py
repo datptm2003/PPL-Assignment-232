@@ -5,178 +5,280 @@
 *   This class provides facilities for method generation
 *
 '''
-class MIPSCode:
-    zero_reg = ["$0","$zero"]
-    at_reg = ["$at"]
-    val_reg = ["$v0","$v1"]
-    arg_reg = [f"$a{a}" for a in range(4)]
-    tmp_reg = [f"$t{t}" for t in range(10)]
-    sav_reg = [f"$s{s}" for s in range(8)]
-    ker_reg = ["$k0","$k1"]
-    glb_reg = ["$gp"]
-    stk_reg = ["$sp"]
-    frm_reg = ["$fp"]
-    ra_reg = ["$ra"]
+from abc import ABC, abstractmethod, ABCMeta
 
-    def emitSIMPLEPROGRAM(self):
-        return """"""
+class MachineCode(ABC):
+    # Arithmetic Instructions
+    @abstractmethod
+    def emitADD(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitSUB(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitADDI(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitADDU(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitSUBU(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitADDIU(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitSMUL(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitLMUL(self, res1, res2):
+        pass
+    @abstractmethod
+    def emitDIV(self, res1, res2):
+        pass
 
-    def emitADD(self, dest, src1, src2):
-        return "add " + dest + ", " + src1 + ", " + src2
-        
-    def emitSUB(self, dest, src1, src2):
-        return "sub " + dest + ", " + src1 + ", " + src2
+    # Logic Instructions
+    @abstractmethod
+    def emitAND(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitOR(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitANDI(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitORI(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitSHIFTL(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitSHIFTR(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitADDI(self, store, res, num):
+        pass
 
-    def emitADDI(self, dest, src, in_const):
-        return "addi " + dest + ", " + src + ", " + str(in_const)
+    # Data Transfer
+    @abstractmethod
+    def emitLW(self, store, index, res):
+        pass
+    @abstractmethod
+    def emitSW(self, store, index, res):
+        pass
+    @abstractmethod
+    def emitLUI(self, store, num):
+        pass
+    @abstractmethod
+    def emitLA(self, store, label):
+        pass
+    @abstractmethod
+    def emitLI(self, store, num):
+        pass
+    @abstractmethod
+    def emitMFHI(self, store):
+        pass
+    @abstractmethod
+    def emitMFLO(self, store):
+        pass
+    @abstractmethod
+    def emitMOVE(self, store, res):
+        pass
 
-    def emitADDU(self, dest, src1, src2):
-        return "addu " + dest + ", " + src1 + ", " + src2
+    # Conditional Branch
+    @abstractmethod
+    def emitBEQ(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitBNE(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitBGT(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitBGE(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitBLT(self, store, res, num):
+        pass
+    @abstractmethod
+    def emitBLE(self, store, res, num):
+        pass
 
-    def emitSUBU(self, dest, src1, src2):
-        return "subu " + dest + ", " + src1 + ", " + src2
+    # Comparison
+    @abstractmethod
+    def emitSLT(self, store, res1, res2):
+        pass
+    @abstractmethod
+    def emitSLTI(self, store, res, num):
+        pass
 
-    def emitADDIU(self, dest, src, in_const):
-        return "addiu " + dest + ", " + src + ", " + str(in_const)
+    # Unconditional Jump
+    @abstractmethod
+    def emitJUMP(self, address):
+        pass
+    @abstractmethod
+    def emitJUMPR(self, res):
+        pass
+    @abstractmethod
+    def emitJUMPAL(self, address):
+        pass
+
+    # System Calls
+    @abstractmethod
+    def emitSYSCALL(self):
+        pass
+
+    # Assembler Directives
+    @abstractmethod
+    def emitWORD(self, value):
+        pass
+    @abstractmethod
+    def emitHALF(self, value):
+        pass
+    @abstractmethod
+    def emitBYTE(self, value):
+        pass
+    @abstractmethod
+    def emitASCII(self, str):
+        pass
+    @abstractmethod
+    def emitASCIIZ(self, str):
+        pass
+    @abstractmethod
+    def emitSPACE(self, value):
+        pass
+    @abstractmethod
+    def emitALIGN(self, value):
+        pass
+
+    @abstractmethod
+    def emitGLOBAL(self, name):
+        pass
+    @abstractmethod
+    def emitTEXT(self):
+        pass
+    @abstractmethod
+    def emitLABEL(self, label):
+        pass
+    @abstractmethod
+    def emitDATA(self):
+        pass
+
+
+class MIPSCode(MachineCode):
+    END = '\n'
+    INDENT = '\t'
+
+    # Arithmetics
+    def emitADD(self, store, res1, res2):
+        return MIPSCode.INDENT + 'add ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitSUB(self, store, res1, res2):
+        return MIPSCode.INDENT + 'sub ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitADDI(self, store, res, num):
+        return MIPSCode.INDENT + 'addi ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitADDU(self, store, res1, res2):
+        return MIPSCode.INDENT + 'addu ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitSUBU(self, store, res1, res2):
+        return MIPSCode.INDENT + 'subu ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitADDIU(self, store, res, num):
+        return MIPSCode.INDENT + 'addiu ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitSMUL(self, store, res1, res2):
+        return MIPSCode.INDENT + 'mul ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitLMUL(self, res1, res2):
+        return MIPSCode.INDENT + 'mult ' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitDIV(self, res1, res2):
+        return MIPSCode.INDENT + 'div ' + str(res1) + ',' + str(res2) + MIPSCode.END
     
-    def emitMUL(self, dest, src1, src2):
-        return "mul " + dest + ", " + src1 + ", " + src2
+    # Logical
+    def emitAND(self, store, res1, res2):
+        return MIPSCode.INDENT + 'and ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitOR(self, store, res1, res2):
+        return MIPSCode.INDENT + 'or ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitANDI(self, store, res, num):
+        return MIPSCode.INDENT + 'andi ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitORI(self, store, res, num):
+        return MIPSCode.INDENT + 'ori ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitSHIFTL(self, store, res, num):
+        return MIPSCode.INDENT + 'sll ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitSHIFTR(self, store, res, num):
+        return MIPSCode.INDENT + 'srl ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
     
-    def emitMULT(self, src1, src2):
-        return "mult " + src1 + ", " + src2
+    # Data transfer
+    def emitLW(self, store, index, res):
+        return MIPSCode.INDENT + 'lw ' + str(store) + ',' + str(index) + '(' + str(res) + ')' + MIPSCode.END
+    def emitSW(self, store, index, res):
+        return MIPSCode.INDENT + 'sw ' + str(store) + ',' + str(index) + '(' + str(res) + ')' + MIPSCode.END
+    def emitSWLabel(self, store, label):
+        return MIPSCode.INDENT + 'sw ' + str(store) + ',' + str(label) + MIPSCode.END
+    def emitLUI(self, store, num):
+        return MIPSCode.INDENT + 'lui ' + str(store) + ',' + str(num) + MIPSCode.END
+    def emitLA(self, store, label):
+        return MIPSCode.INDENT + 'la ' + str(store) + ',' + str(label) + MIPSCode.END
+    def emitLI(self, store, num):
+        return MIPSCode.INDENT + 'li ' + str(store) + ',' + str(num) + MIPSCode.END
+    def emitMFHI(self, store):
+        return MIPSCode.INDENT + 'mfhi ' + str(store) + MIPSCode.END
+    def emitMFLO(self, store):
+        return MIPSCode.INDENT + 'mflo ' + str(store) + MIPSCode.END
+    def emitMOVE(self, store, res):
+        return MIPSCode.INDENT + 'move ' + str(store) + ',' + str(res) + MIPSCode.END
     
-    def emitDIV(self, src1, src2):
-        return "div " + src1 + ", " + src2
-
-    def emitAND(self, dest, src1, src2):
-        return "and " + dest + ", " + src1 + ", " + src2
-
-    def emitOR(self, dest, src1, src2):
-        return "or " + dest + ", " + src1 + ", " + src2
-
-    def emitNOR(self, dest, src1, src2):
-        return "nor " + dest + ", " + src1 + ", " + src2
-
-    def emitANDI(self, dest, src, in_const):
-        return "andi " + dest + ", " + src + ", " + str(in_const)
-
-    def emitORI(self, dest, src, in_const):
-        return "ori " + dest + ", " + src + ", " + str(in_const)
-
-    def emitSLL(self, dest, src, in_const):
-        return "sll " + dest + ", " + src + ", " + str(in_const)
-
-    def emitSRL(self, dest, src, in_const):
-        return "srl " + dest + ", " + src + ", " + str(in_const)
-
-    def emitLW(self, dest, src, offset):
-        return "lw " + dest + ", " + src + ", " + str(offset)
-
-    def emitLH(self, dest, src, offset):
-        return "lh " + dest + ", " + src + ", " + str(offset)
-
-    def emitLB(self, dest, src, offset):
-        return "lb " + dest + ", " + src + ", " + str(offset)
-
-    def emitLUI(self, dest, in_const):
-        return "lui " + dest + ", " + str(in_const)
+    # Conditional Branch
+    def emitBEQ(self, store, res, num):
+        return MIPSCode.INDENT + 'beq ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBNE(self, store, res, num):
+        return MIPSCode.INDENT + 'bne ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBGT(self, store, res, num):
+        return MIPSCode.INDENT + 'bgt ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBGE(self, store, res, num):
+        return MIPSCode.INDENT + 'bge ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBLT(self, store, res, num):
+        return MIPSCode.INDENT + 'blt ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBLE(self, store, res, num):
+        return MIPSCode.INDENT + 'ble ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
     
-    def emitLA(self, dest, label):
-        return "la " + dest + ", " + label
+    # Comparison
+    def emitSLT(self, store, res1, res2):
+        return MIPSCode.INDENT + 'slt ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitSLTI(self, store, res, num):
+        return MIPSCode.INDENT + 'slti ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
     
-    def emitLI(self, dest, in_const):
-        return "la " + dest + ", " + str(in_const)
-
-    def emitLHU(self, dest, src, offset):
-        return "lhu " + dest + ", " + src + ", " + str(offset)
-
-    def emitLBU(self, dest, src, offset):
-        return "lbu " + dest + ", " + src + ", " + str(offset)
-
-    def emitSW(self, dest, src, offset):
-        return "sw " + dest + ", " + src + ", " + str(offset)
-
-    def emitSH(self, dest, src, offset):
-        return "sh " + dest + ", " + src + ", " + str(offset)
-
-    def emitSB(self, dest, src, offset):
-        return "sb " + dest + ", " + src + ", " + str(offset)
-
-    def emitMFHI(self, dest):
-        return "mfhi " + dest
+    # Unconditional Jump
+    def emitJUMP(self, address):
+        return MIPSCode.INDENT + 'j ' + str(address) + MIPSCode.END
+    def emitJUMPR(self, res):
+        return MIPSCode.INDENT + 'jr ' + str(res) + MIPSCode.END
+    def emitJUMPAL(self, address):
+        return MIPSCode.INDENT + 'jal ' + str(address) + MIPSCode.END
     
-    def emitMFLO(self, dest):
-        return "mflo " + dest
+    # System Calls
+    def emitSYSCALL(self):
+        return MIPSCode.INDENT + 'syscall' + MIPSCode.END
 
-    def emitGOTO(self, label):
-        return "goto " + label
-
-    def emitJ(self, label):
-        return "j " + label
-
-    def emitJR(self, reg):
-        return "jr " + reg
-
-    def emitJAL(self, reg):
-        return "jal " + reg
-
-    def emitBEQ(self, src1, src2, offset):
-        return "beq " + src1 + ", " + src2 + ", " + str(offset)
-
-    def emitBNE(self, src1, src2, offset):
-        return "bne " + src1 + ", " + src2 + ", " + str(offset)
-
-    def emitBGT(self, src1, src2, offset):
-        return "bgt " + src1 + ", " + src2 + ", " + str(offset)
+    # Assembler Directives
+    def emitWORD(self, value):
+        return MIPSCode.INDENT + '.word ' + str(value) + MIPSCode.END
+    def emitHALF(self, value):
+        return MIPSCode.INDENT + '.half ' + str(value) + MIPSCode.END
+    def emitBYTE(self, value):
+        return MIPSCode.INDENT + '.byte ' + str(value) + MIPSCode.END
+    def emitASCII(self, str):
+        return MIPSCode.INDENT + '.ascii ' + str + MIPSCode.END
+    def emitASCIIZ(self, str):
+        return MIPSCode.INDENT + '.asciiz ' + str + MIPSCode.END
+    def emitSPACE(self, value):
+        return MIPSCode.INDENT + '.ascii ' + str(value) + MIPSCode.END
+    def emitALIGN(self, value):
+        return MIPSCode.INDENT + '.align ' + str(value) + MIPSCode.END
     
-    def emitBGE(self, src1, src2, offset):
-        return "bge " + src1 + ", " + src2 + ", " + str(offset)
-    
-    def emitBLT(self, src1, src2, offset):
-        return "blt " + src1 + ", " + src2 + ", " + str(offset)
-    
-    def emitBLE(self, src1, src2, offset):
-        return "ble " + src1 + ", " + src2 + ", " + str(offset)
-
-    def emitSLT(self, dest, src1, src2):
-        return "slt " + dest + ", " + src1 + ", " + src2
-
-    def emitSLTU(self, dest, src1, src2):
-        return "sltu " + dest + ", " + src1 + ", " + src2
-
-    def emitSLTI(self, dest, src, in_const):
-        return "slt " + dest + ", " + src + ", " + str(in_const)
-
-    def emitSLTIU(self, dest, src, in_const):
-        return "sltiu " + dest + ", " + src + ", " + str(in_const)
-
-    def emitWORD(self, var, val_lst):
-        text = val_lst[0]
-        for val in val_lst[1:]:
-            text += ", " + val
-        return var + ": " + ".word " + text
-    
-    def emitHALF(self, var, val_lst):
-        text = val_lst[0]
-        for val in val_lst[1:]:
-            text += ", " + val
-        return var + ": " + ".half " + text
-    
-    def emitBYTE(self, var, val_lst):
-        text = val_lst[0]
-        for val in val_lst[1:]:
-            text += ", " + val
-        return var + ": " + ".byte " + text
-    
-    def emitASCII(self, var, val):
-        return var + ": " + ".ascii " + "\"" + val + "\""
-    
-    def emitASCIIZ(self, var, val):
-        return var + ": " + ".asciiz " + "\"" + val + "\""
-    
-    def emitSPACE(self, var, n_byte):
-        return var + ": " + ".space " + str(n_byte)
-
-    def emitALIGN(self, var, n):
-        return var + ": " + ".align " + str(n)
-
+    ####
+    def emitGLOBAL(self, name):
+        return ".globl " + name + MIPSCode.END
+    def emitTEXT(self):
+        return ".text" + MIPSCode.END
+    def emitLABEL(self, label):
+        return label + ":" + MIPSCode.END 
+    def emitDATA(self):
+        return ".data" + MIPSCode.END
