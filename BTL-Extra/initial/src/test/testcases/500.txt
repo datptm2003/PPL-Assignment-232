@@ -1,1 +1,1 @@
-void main() {putInt(100);}
+Program([FuncDecl(main, [], Block([CallStmt(writeNumber, [BinaryOp(+, NumLit(4), NumLit(3))])]))])

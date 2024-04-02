@@ -180,8 +180,9 @@ class TestCodeGen():
             os.mkdir(path)
         f = open(os.path.join(soldir, str(num) + ".txt"),"w")
         try:
+            # print("1******",asttree)
             codeGen.gen(asttree, path)
-    
+            # print("2******",asttree)
             # For MIPS code
             proc = subprocess.run("java  -jar "+ MIPS_JAR + " " + path + "/ZCodeClass.asm",shell=True,stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             output = proc.stdout.decode('utf-8')

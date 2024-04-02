@@ -107,105 +107,155 @@ class CodeGenVisitor(BaseVisitor, Utils):
         self.env = env
         self.className = "ZCodeClass"
         self.path = dir_
-        self.emit = Emitter(self.path + "/" + self.className + ".j")
+        self.emit = Emitter(self.path + "/" + self.className + ".asm")
+        
 
-    def visitProgram(self, ast: Program, ctxt):
+    def visitProgram(self, ast: Program, o):
         #ast: Program
         #c: Any
+        # print("########")
+        # self.emit.printout(self.emit.emitPROLOG(self.className, "java.lang.Object"))
+        # e = SubBody(None, self.env)
+        # for x in ast.decl:
+        #     e = self.visit(x, e)
+        # # generate default constructor
+        # # self.genMETHOD(FuncDecl("<init>", [], Block([])), ctxt, Frame("<init>"))
+        # self.emit.emitEPILOG()
+        # return ctxt
 
-        self.emit.printout(self.emit.emitPROLOG(self.className, "java.lang.Object"))
-        e = SubBody(None, self.env)
-        for x in ast.decl:
-            e = self.visit(x, e)
-        # generate default constructor
-        self.genMETHOD(FuncDecl("<init>", [], Block([])), ctxt, Frame("<init>"))
+        self.emit.printout(self.emit.emitTEXT())
+        o = {}
+        for dclr in ast.decl:
+            self.visit(dclr, o)
         self.emit.emitEPILOG()
-        return ctxt
 
-    def genMETHOD(self, dclr: FuncDecl, o: List[Symbol], frame):
-        #consdecl: FuncDecl
-        #o: Any
-        #frame: Frame
+    # def genMETHOD(self, dclr: FuncDecl, o: List[Symbol], frame):
+    #     #consdecl: FuncDecl
+    #     #o: Any
+    #     #frame: Frame
 
-        isInit = (dclr.name == "<init>")
-        isMain = (dclr.name == "main" and len(dclr.param) == 0)
-        methodName = "<init>" if isInit else dclr.name
-        intype = [ArrayPointerType(StringType())] if isMain else [retrieveType(x.varType) for x in dclr.param]
-        mtype = MType(intype, None)
+    #     isInit = (dclr.name == "<init>")
+    #     isMain = (dclr.name == "main" and len(dclr.param) == 0)
+    #     methodName = "<init>" if isInit else dclr.name
+    #     intype = [ArrayPointerType(StringType())] if isMain else [retrieveType(x.varType) for x in dclr.param]
+    #     mtype = MType(intype, None)
 
-        self.emit.printout(self.emit.emitMETHOD(methodName, mtype, not isInit, frame)) # Need handle mtype
+    #     self.emit.printout(self.emit.emitMETHOD(methodName, mtype, not isInit, frame)) # Need handle mtype
 
-        frame.enterScope(True)
+    #     frame.enterScope(True)
 
-        glenv = o
+    #     glenv = o
 
-        # Generate code for parameter declarations
-        if isInit:
-            self.emit.printout(self.emit.emitVAR(frame.getNewIndex(), "this", ClassType(self.className), frame.getStartLabel(), frame.getEndLabel(), frame))
-        if isMain:
-            self.emit.printout(self.emit.emitVAR(frame.getNewIndex(), "args", ArrayPointerType(StringType()), frame.getStartLabel(), frame.getEndLabel(), frame))
+    #     # Generate code for parameter declarations
+    #     if isInit:
+    #         self.emit.printout(self.emit.emitVAR(frame.getNewIndex(), "this", ClassType(self.className), frame.getStartLabel(), frame.getEndLabel(), frame))
+    #     if isMain:
+    #         self.emit.printout(self.emit.emitVAR(frame.getNewIndex(), "args", ArrayPointerType(StringType()), frame.getStartLabel(), frame.getEndLabel(), frame))
 
-        body = dclr.body
-        self.emit.printout(self.emit.emitLABEL(frame.getStartLabel(), frame))
+    #     body = dclr.body
+    #     self.emit.printout(self.emit.emitLABEL(frame.getStartLabel(), frame))
 
-        # Generate code for statements
-        if isInit:
-            self.emit.printout(self.emit.emitREADVAR("this", ClassType(self.className), 0, frame))
-            self.emit.printout(self.emit.emitINVOKESPECIAL(frame))
-        list(map(lambda x: self.visit(x, SubBody(frame, glenv)), body.stmt))
+    #     # Generate code for statements
+    #     if isInit:
+    #         self.emit.printout(self.emit.emitREADVAR("this", ClassType(self.className), 0, frame))
+    #         self.emit.printout(self.emit.emitINVOKESPECIAL(frame))
+    #     list(map(lambda x: self.visit(x, SubBody(frame, glenv)), body.stmt))
 
-        self.emit.printout(self.emit.emitLABEL(frame.getEndLabel(), frame))
+    #     self.emit.printout(self.emit.emitLABEL(frame.getEndLabel(), frame))
 
-        # if type(returnType) is VoidType:
-        self.emit.printout(self.emit.emitRETURN(None, frame))
+    #     # if type(returnType) is VoidType:
+    #     self.emit.printout(self.emit.emitRETURN(None, frame))
 
-        self.emit.printout(self.emit.emitENDMETHOD(frame))
-        frame.exitScope()
+    #     self.emit.printout(self.emit.emitENDMETHOD(frame))
+    #     frame.exitScope()
 
-        
+    def visitVarDecl(self, ctx, o):
+        val = "" 
+        self.emit.printoutData(self.emit.emitVAR(ctx.name, val))
+        self.emit.printoutData(self.emit.emitDATA())
+
+    def visitBlock(self, ast, o):
+        for s in ast.stmt:
+            self.visit(s, o)
 
     def visitFuncDecl(self, ast: FuncDecl, o):
         #ast: FuncDecl
         #o: Any
 
-        subctxt = o
-        frame = Frame(ast.name)
-        self.genMETHOD(ast, subctxt.sym, frame)
-        return SubBody(None, [Symbol(ast.name, [], CName(self.className))] + subctxt.sym)
+        # subctxt = o
+        # frame = Frame(ast.name)
+        # self.genMETHOD(ast, subctxt.sym, frame)
+        # return SubBody(None, [Symbol(ast.name, [], CName(self.className))] + subctxt.sym)
+        if ast.name == "main":
+            # Set the global function in MIPS
+            self.emit.printout(self.emit.emitGLOBAL("main"))
+        self.emit.printout(self.emit.emitFUNC(ast.name))
+        # print("************",ast.body)
+        self.visit(ast.body, o)
+
+        if ast.name == "main":
+            self.emit.printout(self.emit.emitLI(10,"$v0"))
+            self.emit.printout(self.emit.emitSYS())
 
     def visitCallStmt(self, ast: CallStmt, o: SubBody):
-        ctxt = o
-        frame = ctxt.frame
-        nenv = ctxt.sym
-        sym = self.lookup(ast.name, nenv, lambda x: x.name)
-        cname = sym.value.value
-        ctype = sym.mtype
-        # print(ctype)
-
-        in_ = ("", list())
-        for x in ast.args:
-            parCode, parType = self.visit(x, Access(frame, nenv, False, True))
-            in_ = (in_[0] + parCode, in_[1].append(parType))
-        self.emit.printout(in_[0])
-        self.emit.printout(self.emit.emitINVOKESTATIC(cname + "/" + ast.name, ctype, frame))
+        # print("::::::::",ast.name)
+        if (ast.name == "writeNumber"):
+            # print("::::::::",ast.args)
+            for arg in ast.args:
+                text, reg = self.visit(arg, o)
+                self.emit.printout("\n")
+                add_text, add_reg = self.emit.emitADDOP(NumberType(), '$a0', reg, '$zero',o)
+                self.emit.printout(add_text)
+                self.emit.printout(self.emit.emitLI(1,"$v0"))
+                self.emit.printout(self.emit.emitSYS())
+                self.emit.printout("\n")
 
     def visitBinaryOp(self, ast: BinaryOp, o):
-        ctxt = o
-        frame = ctxt.frame
         op = ast.op
+        text = ""
 
         if op == '+':
-            lcode = self.visit(ast.left, ctxt)
-            rcode = self.visit(ast.right, ctxt)
+            lcode, lreg = self.visit(ast.left, o)
 
-            return lcode + rcode + self.emit.emitADDOP(op, NumberType(), frame), NumberType()
+            # if lreg == "$sp":
+            #     lcode = self.emit.popWORD("$t0",o) + lcode
+            #     lreg = "$t0"
+
+            add_ltext, add_lreg = self.emit.emitADDOP(NumberType(),"$s1","$s1",lreg,o)
+
+            if add_lreg == "$sp":
+                add_ltext = self.emit.popWORD("$s0",o) + add_ltext
+                add_lreg = "$s0"
+
+            text += add_ltext
+
+            
+
+            rcode, rreg = self.visit(ast.right, o)
+            # if rreg == "$sp":
+            #     rcode = self.emit.popWORD("$t0",o) + rcode
+            #     rreg = "$t0"
+
+            add_rtext, add_rreg = self.emit.emitADDOP(NumberType(),"$s1","$s1",rreg,o)
+
+            if add_rreg == "$sp":
+                add_rtext = self.emit.popWORD("$s0",o) + add_rtext
+                add_rreg = "$s0"
+
+            text += add_rtext
+            add_text, add_reg = self.emit.emitADDOP(NumberType(),"$s0",add_lreg,add_rreg,o)
+            text += add_text
+            self.emit.printout(text)
+            return text,add_reg
 
 
     def visitNumberLiteral(self, ast: NumberLiteral, o):
         #o: Any
-
-        ctxt = o
-        frame = ctxt.frame
-        return self.emit.emitPUSHICONST(ast.value, frame)
+        text,reg = self.emit.emitNUMBERLITERAL(ast.value, o)
+        if reg == "$sp":
+            text = self.emit.popWORD("$t0",o) + text
+            reg = "$t0"
+        self.emit.printout(text)
+        return text, reg
 
     

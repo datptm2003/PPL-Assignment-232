@@ -1,0 +1,1 @@
+Program([FuncDecl(main, [], Block([CallStmt(writeNumber, [BinaryOp(+, BinaryOp(+, NumLit(1), NumLit(2)), NumLit(3))])]))])

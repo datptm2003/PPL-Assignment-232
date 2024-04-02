@@ -8,678 +8,284 @@
 from abc import ABC, abstractmethod, ABCMeta
 
 class MachineCode(ABC):
+    # Arithmetic Instructions
     @abstractmethod
-    def emitPUSHNULL(self):
+    def emitADD(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitICONST(self, i):
-        #i: Int
+    def emitSUB(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitBIPUSH(self, i):
-        #i: Int
+    def emitADDI(self, store, res, num):
         pass
     @abstractmethod
-    def emitSIPUSH(self, i):
-        #i: Int
+    def emitADDU(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitLDC(self, in_):
-        #in_: String
+    def emitSUBU(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitFCONST(self, i):
-        #i: String
+    def emitADDIU(self, store, res, num):
         pass
     @abstractmethod
-    def emitILOAD(self, in_):
-        #in_: Int
+    def emitSMUL(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitFLOAD(self, in_):
-        #in_: Int
+    def emitLMUL(self, res1, res2):
         pass
     @abstractmethod
-    def emitISTORE(self, in_):
-        #in_: Int
+    def emitDIV(self, res1, res2):
+        pass
+
+    # Logic Instructions
+    @abstractmethod
+    def emitAND(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitFSTORE(self, in_):
-        #in_: Int
+    def emitOR(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitALOAD(self, in_):
-        #in_: Int
+    def emitANDI(self, store, res, num):
         pass
     @abstractmethod
-    def emitASTORE(self, in_):
-        #in_: Int
+    def emitORI(self, store, res, num):
         pass
     @abstractmethod
-    def emitIASTORE(self):
+    def emitSHIFTL(self, store, res, num):
         pass
     @abstractmethod
-    def emitFASTORE(self):
+    def emitSHIFTR(self, store, res, num):
         pass
     @abstractmethod
-    def emitBASTORE(self):
+    def emitADDI(self, store, res, num):
+        pass
+
+    # Data Transfer
+    @abstractmethod
+    def emitLW(self, store, index, res):
         pass
     @abstractmethod
-    def emitAASTORE(self):
+    def emitSW(self, store, index, res):
         pass
     @abstractmethod
-    def emitIALOAD(self):
+    def emitLUI(self, store, num):
         pass
     @abstractmethod
-    def emitFALOAD(self):
+    def emitLA(self, store, label):
         pass
     @abstractmethod
-    def emitBALOAD(self):
+    def emitLI(self, store, num):
         pass
     @abstractmethod
-    def emitAALOAD(self):
+    def emitMFHI(self, store):
         pass
     @abstractmethod
-    def emitGETSTATIC(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
+    def emitMFLO(self, store):
         pass
     @abstractmethod
-    def emitPUTSTATIC(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
+    def emitMOVE(self, store, res):
+        pass
+
+    # Conditional Branch
+    @abstractmethod
+    def emitBEQ(self, store, res, num):
         pass
     @abstractmethod
-    def emitGETFIELD(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
+    def emitBNE(self, store, res, num):
         pass
     @abstractmethod
-    def emitPUTFIELD(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
+    def emitBGT(self, store, res, num):
         pass
     @abstractmethod
-    def emitIADD(self):
+    def emitBGE(self, store, res, num):
         pass
     @abstractmethod
-    def emitFADD(self):
+    def emitBLT(self, store, res, num):
         pass
     @abstractmethod
-    def emitISUB(self):
+    def emitBLE(self, store, res, num):
+        pass
+
+    # Comparison
+    @abstractmethod
+    def emitSLT(self, store, res1, res2):
         pass
     @abstractmethod
-    def emitFSUB(self):
+    def emitSLTI(self, store, res, num):
+        pass
+
+    # Unconditional Jump
+    @abstractmethod
+    def emitJUMP(self, address):
         pass
     @abstractmethod
-    def emitIMUL(self):
+    def emitJUMPR(self, res):
         pass
     @abstractmethod
-    def emitFMUL(self):
+    def emitJUMPAL(self, address):
+        pass
+
+    # System Calls
+    @abstractmethod
+    def emitSYSCALL(self):
+        pass
+
+    # Assembler Directives
+    @abstractmethod
+    def emitWORD(self, value):
         pass
     @abstractmethod
-    def emitIDIV(self):
+    def emitHALF(self, value):
         pass
     @abstractmethod
-    def emitFDIV(self):
+    def emitBYTE(self, value):
         pass
     @abstractmethod
-    def emitIAND(self):
+    def emitASCII(self, str):
         pass
     @abstractmethod
-    def emitIOR(self):
+    def emitASCIIZ(self, str):
         pass
     @abstractmethod
-    def emitIREM(self):
+    def emitSPACE(self, value):
         pass
     @abstractmethod
-    def emitIFACMPEQ(self, label):
-        #label: Int
+    def emitALIGN(self, value):
+        pass
+
+    @abstractmethod
+    def emitGLOBAL(self, name):
         pass
     @abstractmethod
-    def emitIFACMPNE(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFICMPEQ(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFICMPNE(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFICMPLT(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFICMPLE(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFICMPGT(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFICMPGE(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFEQ(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFNE(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFLT(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFLE(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFGT(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitIFGE(self, label):
-        #label: Int
+    def emitTEXT(self):
         pass
     @abstractmethod
     def emitLABEL(self, label):
-        #label: Int
         pass
     @abstractmethod
-    def emitGOTO(self, label):
-        #label: Int
-        pass
-    @abstractmethod
-    def emitINEG(self):
-        pass
-    @abstractmethod
-    def emitFNEG(self):
-        pass
-    @abstractmethod
-    def emitDUP(self):
-        pass
-    @abstractmethod
-    def emitDUPX2(self):
-        pass
-    @abstractmethod
-    def emitPOP(self):
-        pass
-    @abstractmethod
-    def emitI2F(self):
-        pass
-    @abstractmethod
-    def emitNEW(self, lexeme):
-        #lexeme: String
-        pass
-    @abstractmethod
-    def emitNEWARRAY(self, lexeme):
-        #lexeme: String
-        pass
-    @abstractmethod
-    def emitANEWARRAY(self, lexeme):
-        #lexeme: String
-        pass
-    @abstractmethod
-    def emitMULTIANEWARRAY(self, typ, dimensions):
-        #typ: String
-        #dimensions: Int
-        pass
-    @abstractmethod
-    def emitINVOKESTATIC(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        pass
-    @abstractmethod
-    def emitINVOKESPECIAL(self, lexeme=None, typ=None):
-        #lexeme: String
-        #typ: String
-        pass
-    @abstractmethod
-    def emitINVOKEVIRTUAL(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        pass
-    @abstractmethod
-    def emitI(self):
-        pass
-    @abstractmethod
-    def emitF(self):
-        pass
-    @abstractmethod
-    def emit(self):
-        pass
-    @abstractmethod
-    def emitLIMITSTACK(self, in_):
-        #in_: String
-        pass
-    @abstractmethod
-    def emitFCMPL(self):
-        pass
-    @abstractmethod
-    def emitLIMITLOCAL(self, in_):
-        #in_: String
-        pass
-    @abstractmethod
-    def emitVAR(self, in_, varName, inType, fromLabel, toLabel):
-        #in_: Int
-        #varName: String
-        #inType: String
-        #fromLabel: Int
-        #toLabel: Int
-        pass
-    @abstractmethod
-    def emitMETHOD(self, lexeme, typ, isStatic):
-        #lexeme: String
-        #typ: String
-        #isStaic: Boolean
-        pass
-    @abstractmethod
-    def emitENDMETHOD(self):
-        pass
-    @abstractmethod
-    def emitSOURCE(self, lexeme):
-        #lexeme: String
-        pass
-    @abstractmethod
-    def emitCLASS(self, lexeme):
-        #lexeme: String
-        pass
-    @abstractmethod
-    def emitSUPER(self, lexeme):
-        #lexeme: String
-        pass
-    @abstractmethod
-    def emitSTATICFIELD(self, lexeme, typ, isFinal):
-        #lexeme: String
-        #typ: String
-        #isFinal: Boolean
-        pass
-    @abstractmethod
-    def emitINSTANCEFIELD(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        pass
-    @abstractmethod
-    def emitRETURN(self):
-        pass
-    @abstractmethod
-    def emitIRETURN(self):
-        pass
-    @abstractmethod
-    def emitFRETURN(self):
-        pass
-    @abstractmethod
-    def emitARETURN(self):
+    def emitDATA(self):
         pass
 
 
-class JasminCode(MachineCode):
-    END = "\n"
-    INDENT = "\t"
+class MIPSCode(MachineCode):
+    END = '\n'
+    INDENT = '\t'
 
-    def emitPUSHNULL(self):
-        return JasminCode.INDENT + "aconst_null" + JasminCode.END
+    zero_reg = ["$zero"]
+    tmp_reg = [f"$t{n}" for n in range(9)]
+    sav_reg = [f"$s{n}" for n in range(7)]
+    val_reg = [f"$v{n}" for n in range(1)]
+    arg_reg = [f"$a{n}" for n in range(3)]
+    stk_reg = ["$sp"]
 
-    def emitICONST(self, i):
-        #i: Int
-        if i == -1:
-            return JasminCode.INDENT + "iconst_ml" + JasminCode.END
-        elif i >= 0 or i <= 5:
-            return JasminCode.INDENT + "iconst_" + str(i) + JasminCode.END
-        else:
-            raise IllegalOperandException(str(i))
-        
-    def emitBIPUSH(self, i):
-        #i: Int
-        if (i >= -128 and i < -1) or (i > 5 and i <= 127):
-            return JasminCode.INDENT + "bipush " + str(i) + JasminCode.END
-        else:
-            raise IllegalOperandException(str(i))
+    # Arithmetics
+    def emitADD(self, store, res1, res2):
+        return MIPSCode.INDENT + 'add ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitSUB(self, store, res1, res2):
+        return MIPSCode.INDENT + 'sub ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitADDI(self, store, res, num):
+        return MIPSCode.INDENT + 'addi ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitADDU(self, store, res1, res2):
+        return MIPSCode.INDENT + 'addu ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitSUBU(self, store, res1, res2):
+        return MIPSCode.INDENT + 'subu ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitADDIU(self, store, res, num):
+        return MIPSCode.INDENT + 'addiu ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitSMUL(self, store, res1, res2):
+        return MIPSCode.INDENT + 'mul ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitLMUL(self, res1, res2):
+        return MIPSCode.INDENT + 'mult ' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitDIV(self, res1, res2):
+        return MIPSCode.INDENT + 'div ' + str(res1) + ',' + str(res2) + MIPSCode.END
+    
+    # Logical
+    def emitAND(self, store, res1, res2):
+        return MIPSCode.INDENT + 'and ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitOR(self, store, res1, res2):
+        return MIPSCode.INDENT + 'or ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitANDI(self, store, res, num):
+        return MIPSCode.INDENT + 'andi ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitORI(self, store, res, num):
+        return MIPSCode.INDENT + 'ori ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitSHIFTL(self, store, res, num):
+        return MIPSCode.INDENT + 'sll ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitSHIFTR(self, store, res, num):
+        return MIPSCode.INDENT + 'srl ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    
+    # Data transfer
+    def emitLW(self, store, index, res):
+        return MIPSCode.INDENT + 'lw ' + str(store) + ',' + str(index) + '(' + str(res) + ')' + MIPSCode.END
+    def emitSW(self, store, index, res):
+        return MIPSCode.INDENT + 'sw ' + str(store) + ',' + str(index) + '(' + str(res) + ')' + MIPSCode.END
+    def emitSWLabel(self, store, label):
+        return MIPSCode.INDENT + 'sw ' + str(store) + ',' + str(label) + MIPSCode.END
+    def emitLUI(self, store, num):
+        return MIPSCode.INDENT + 'lui ' + str(store) + ',' + str(num) + MIPSCode.END
+    def emitLA(self, store, label):
+        return MIPSCode.INDENT + 'la ' + str(store) + ',' + str(label) + MIPSCode.END
+    def emitLI(self, store, num):
+        return MIPSCode.INDENT + 'li ' + str(store) + ',' + str(num) + MIPSCode.END
+    def emitMFHI(self, store):
+        return MIPSCode.INDENT + 'mfhi ' + str(store) + MIPSCode.END
+    def emitMFLO(self, store):
+        return MIPSCode.INDENT + 'mflo ' + str(store) + MIPSCode.END
+    def emitMOVE(self, store, res):
+        return MIPSCode.INDENT + 'move ' + str(store) + ',' + str(res) + MIPSCode.END
+    
+    # Conditional Branch
+    def emitBEQ(self, store, res, num):
+        return MIPSCode.INDENT + 'beq ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBNE(self, store, res, num):
+        return MIPSCode.INDENT + 'bne ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBGT(self, store, res, num):
+        return MIPSCode.INDENT + 'bgt ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBGE(self, store, res, num):
+        return MIPSCode.INDENT + 'bge ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBLT(self, store, res, num):
+        return MIPSCode.INDENT + 'blt ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    def emitBLE(self, store, res, num):
+        return MIPSCode.INDENT + 'ble ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    
+    # Comparison
+    def emitSLT(self, store, res1, res2):
+        return MIPSCode.INDENT + 'slt ' + str(store) + ',' + str(res1) + ',' + str(res2) + MIPSCode.END
+    def emitSLTI(self, store, res, num):
+        return MIPSCode.INDENT + 'slti ' + str(store) + ',' + str(res) + ',' + str(num) + MIPSCode.END
+    
+    # Unconditional Jump
+    def emitJUMP(self, address):
+        return MIPSCode.INDENT + 'j ' + str(address) + MIPSCode.END
+    def emitJUMPR(self, res):
+        return MIPSCode.INDENT + 'jr ' + str(res) + MIPSCode.END
+    def emitJUMPAL(self, address):
+        return MIPSCode.INDENT + 'jal ' + str(address) + MIPSCode.END
+    
+    # System Calls
+    def emitSYSCALL(self):
+        return MIPSCode.INDENT + 'syscall' + MIPSCode.END
 
-    def emitSIPUSH(self, i):
-        #i: Int
-        if (i >= -32768 and i < -128) or (i > 127 and i <= 32767):
-            return JasminCode.INDENT + "sipush " + str(i) + JasminCode.END
-        else:
-            raise IllegalOperandException(str(i))
-
-    def emitLDC(self, in_):
-        #in_: String
-        return JasminCode.INDENT + "ldc " + in_ + JasminCode.END
-
-    def emitFCONST(self, i):
-        #i: String
-        if i == "0.0":
-            return JasminCode.INDENT + "fconst_0" + JasminCode.END
-        elif i == "1.0":
-            return JasminCode.INDENT + "fconst_1" + JasminCode.END
-        elif i == "2.0":
-            return JasminCode.INDENT + "fconst_2" + JasminCode.END
-        else:
-            raise IllegalOperandException(i)
+    # Assembler Directives
+    def emitWORD(self, value):
+        return MIPSCode.INDENT + '.word ' + str(value) + MIPSCode.END
+    def emitHALF(self, value):
+        return MIPSCode.INDENT + '.half ' + str(value) + MIPSCode.END
+    def emitBYTE(self, value):
+        return MIPSCode.INDENT + '.byte ' + str(value) + MIPSCode.END
+    def emitASCII(self, str):
+        return MIPSCode.INDENT + '.ascii ' + str + MIPSCode.END
+    def emitASCIIZ(self, str):
+        return MIPSCode.INDENT + '.asciiz ' + str + MIPSCode.END
+    def emitSPACE(self, value):
+        return MIPSCode.INDENT + '.ascii ' + str(value) + MIPSCode.END
+    def emitALIGN(self, value):
+        return MIPSCode.INDENT + '.align ' + str(value) + MIPSCode.END
     
-    def emitILOAD(self, in_):
-        #in_: Int
-        if in_ >= 0 and in_ <= 3:
-            return JasminCode.INDENT + "iload_" + str(in_) + JasminCode.END
-        else:
-            return JasminCode.INDENT + "iload " +str(in_) + JasminCode.END
-    
-    def emitFLOAD(self, in_):
-        #in_: Int
-        if in_ >= 0 and in_ <= 3:
-            return JasminCode.INDENT + "fload_" + str(in_) + JasminCode.END
-        else:
-            return JasminCode.INDENT + "fload " +str(in_) + JasminCode.END
-    
-    def emitISTORE(self, in_):
-        #in_: Int
-        if in_ >= 0 and in_ <= 3:
-            return JasminCode.INDENT + "istore_" + str(in_) + JasminCode.END
-        else:
-            return JasminCode.INDENT + "istore " +str(in_) + JasminCode.END
-    
-    def emitFSTORE(self, in_):
-        #in_: Int
-        if in_ >= 0 and in_ <= 3:
-            return JasminCode.INDENT + "fstore_" + str(in_) + JasminCode.END
-        else:
-            return JasminCode.INDENT + "fstore " +str(in_) + JasminCode.END
-    
-    def emitALOAD(self, in_):
-        #in_: Int
-        if in_ >= 0 and in_ <= 3:
-            return JasminCode.INDENT + "aload_" + str(in_) + JasminCode.END
-        else:
-            return JasminCode.INDENT + "aload " +str(in_) + JasminCode.END
-    
-    def emitASTORE(self, in_):
-        #in_: Int
-        if in_ >= 0 and in_ <= 3:
-            return JasminCode.INDENT + "astore_" + str(in_) + JasminCode.END
-        else:
-            return JasminCode.INDENT + "astore " +str(in_) + JasminCode.END
-    
-    def emitIASTORE(self):
-        return JasminCode.INDENT + "iastore" + JasminCode.END
-    
-    def emitFASTORE(self):
-        return JasminCode.INDENT + "fastore" + JasminCode.END
-    
-    def emitBASTORE(self):
-        return JasminCode.INDENT + "bastore" + JasminCode.END
-    
-    def emitAASTORE(self):
-        return JasminCode.INDENT + "aastore" + JasminCode.END
-    
-    def emitIALOAD(self):
-        return JasminCode.INDENT + "iaload" + JasminCode.END
-    
-    def emitFALOAD(self):
-        return JasminCode.INDENT + "faload" + JasminCode.END
-    
-    def emitBALOAD(self):
-        return JasminCode.INDENT + "baload" + JasminCode.END
-    
-    def emitAALOAD(self):
-        return JasminCode.INDENT + "aaload" + JasminCode.END
-    
-    def emitGETSTATIC(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return JasminCode.INDENT + "getstatic "  + lexeme + " " + typ + JasminCode.END
-        
-    
-    def emitPUTSTATIC(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return JasminCode.INDENT + "putstatic "  + lexeme + " " + typ + JasminCode.END
-    
-    def emitGETFIELD(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return JasminCode.INDENT + "getfield "  + lexeme + " " + typ + JasminCode.END
-    
-    def emitPUTFIELD(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return JasminCode.INDENT + "putfield "  + lexeme + " " + typ + JasminCode.END
-    
-    def emitIADD(self):
-        return JasminCode.INDENT + "iadd" + JasminCode.END
-    
-    def emitFADD(self):
-        return JasminCode.INDENT + "fadd" + JasminCode.END
-    
-    def emitISUB(self):
-        return JasminCode.INDENT + "isub" + JasminCode.END
-    
-    def emitFSUB(self):
-        return JasminCode.INDENT + "fsub" + JasminCode.END
-    
-    def emitIMUL(self):
-        return JasminCode.INDENT + "imul" + JasminCode.END
-    
-    def emitFMUL(self):
-        return JasminCode.INDENT + "fmul" + JasminCode.END
-    
-    def emitIDIV(self):
-        return JasminCode.INDENT + "idiv" + JasminCode.END
-    
-    def emitFDIV(self):
-        return JasminCode.INDENT + "fdiv" + JasminCode.END
-    
-    def emitIAND(self):
-        return JasminCode.INDENT + "iand" + JasminCode.END
-    
-    def emitIOR(self):
-        return JasminCode.INDENT + "ior" + JasminCode.END
-    
-    def emitIREM(self):
-        return JasminCode.INDENT + "rem" + JasminCode.END
-    
-    def emitIFACMPEQ(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_acmpeq Label" + str(label) + JasminCode.END
-    
-    def emitIFACMPNE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_acmpne Label" + str(label) + JasminCode.END
-    
-    def emitIFICMPEQ(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_icmpeq Label" + str(label) + JasminCode.END
-    
-    def emitIFICMPNE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_icmpne Label" + str(label) + JasminCode.END
-    
-    def emitIFICMPLT(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_icmplt Label" + str(label) + JasminCode.END
-    
-    def emitIFICMPLE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_icmple Label" + str(label) + JasminCode.END
-    
-    def emitIFICMPGT(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_icmpgt Label" + str(label) + JasminCode.END
-    
-    def emitIFICMPGE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "if_icmpge Label" + str(label) + JasminCode.END
-    
-    def emitIFEQ(self, label):
-        #label: Int
-        return JasminCode.INDENT + "ifeq Label" + str(label) + JasminCode.END
-    
-    def emitIFNE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "ifne Label" + str(label) + JasminCode.END
-    
-    def emitIFLT(self, label):
-        #label: Int
-        return JasminCode.INDENT + "iflt Label" + str(label) + JasminCode.END
-    
-    def emitIFLE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "ifle Label" + str(label) + JasminCode.END
-    
-    def emitIFGT(self, label):
-        #label: Int
-        return JasminCode.INDENT + "ifgt Label" + str(label) + JasminCode.END
-    
-    def emitIFGE(self, label):
-        #label: Int
-        return JasminCode.INDENT + "ifge Label" + str(label) + JasminCode.END
-    
+    ####
+    def emitGLOBAL(self, name):
+        return ".globl " + name + MIPSCode.END
+    def emitTEXT(self):
+        return ".text" + MIPSCode.END
     def emitLABEL(self, label):
-        #label: Int
-        return "Label" + str(label) + ":" + JasminCode.END
-    
-    def emitGOTO(self, label):
-        #label: Int
-        return JasminCode.INDENT + "goto Label" + label + JasminCode.END
-    
-    def emitINEG(self):
-        return JasminCode.INDENT + "ineg" + JasminCode.END
-    
-    def emitFNEG(self):
-        return JasminCode.INDENT + "fneg" + JasminCode.END
-    
-    def emitDUP(self):
-        return JasminCode.INDENT + "dup" + JasminCode.END
-    
-    def emitDUPX2(self):
-        return JasminCode.INDENT + "dup_x2" + JasminCode.END
-    
-    def emitPOP(self):
-        return JasminCode.INDENT + "pop" + JasminCode.END
-    
-    def emitI2F(self):
-        return JasminCode.INDENT + "i2f" + JasminCode.END
-    
-    def emitNEW(self, lexeme):
-        #lexeme: String
-        return JasminCode.INDENT + "new " + lexeme + JasminCode.END
-    
-    def emitNEWARRAY(self, lexeme):
-        #lexeme: String
-        return JasminCode.INDENT + "newarray " + lexeme + JasminCode.END
-    
-    def emitANEWARRAY(self, lexeme):
-        #lexeme: String
-        return JasminCode.INDENT + "anewarray " + lexeme + JasminCode.END
-    
-    def emitMULTIANEWARRAY(self, typ, dimensions):
-        #typ: String
-        #dimensions: Int
-        return JasminCode.INDENT + "multianewarray " + typ + " " + dimensions + JasminCode.END
-    
-    def emitINVOKESTATIC(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return JasminCode.INDENT + "invokestatic " + lexeme + typ + JasminCode.END
-    
-    def emitINVOKESPECIAL(self, lexeme=None, typ=None):
-        #lexeme: String
-        #typ: String
-        if lexeme is None and typ is None:
-            return JasminCode.INDENT + "invokespecial java/lang/Object/<init>()V" + JasminCode.END
-        elif not lexeme is None and not typ is None:
-            return JasminCode.INDENT + "invokespecial " + lexeme + typ + JasminCode.END
-        
-    
-    def emitINVOKEVIRTUAL(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return JasminCode.INDENT + "invokevirtual " + lexeme + typ + JasminCode.END
-    
-    def emitI(self):
-        return JasminCode.INDENT + "i" + JasminCode.END
-    
-    def emitF(self):
-        return JasminCode.INDENT + "f" + JasminCode.END
-    
-    def emit(self):
-        return JasminCode.INDENT + "" + JasminCode.END
-    
-    def emitLIMITSTACK(self, in_):
-        #in_: Int
-        return ".limit stack " + str(in_) + JasminCode.END
-
-    def emitFCMPL(self):
-        return JasminCode.INDENT + "fcmpl" + JasminCode.END
-        
-    def emitLIMITLOCAL(self, in_):
-        #in_: Int
-        return ".limit locals " + str(in_) + JasminCode.END
-    
-    def emitVAR(self, in_, varName, inType, fromLabel, toLabel):
-        #in_: Int
-        #varName: String
-        #inType: String
-        #fromLabel: Int
-        #toLabel: Int
-        return ".var " + str(in_) + " is " + varName + " " + inType + " from Label" + str(fromLabel) + " to Label" + str(toLabel) + JasminCode.END 
-    
-    def emitMETHOD(self, lexeme, typ, isStatic):
-        #lexeme: String
-        #typ: String
-        #isStaic: Boolean
-        if isStatic:
-            return JasminCode.END + ".method public static " + lexeme + typ + JasminCode.END
-        else:
-            return JasminCode.END + ".method public " + lexeme + typ + JasminCode.END
-    
-    def emitENDMETHOD(self):
-        return ".end method" + JasminCode.END
-        
-    
-    def emitSOURCE(self, lexeme):
-        #lexeme: String
-        return ".source " + lexeme + JasminCode.END
-    
-    def emitCLASS(self, lexeme):
-        #lexeme: String
-        return ".class " + lexeme + JasminCode.END
-    
-    def emitSUPER(self, lexeme):
-        #lexeme: String
-        return ".super " + lexeme + JasminCode.END
-    
-    def emitSTATICFIELD(self, lexeme, typ, isFinal):
-        #lexeme: String
-        #typ: String
-        #isFinal: Boolean
-        if isFinal:
-            return ".field static final " + lexeme + " " + typ + JasminCode.END
-        else:
-            return ".field static " + lexeme + " " + typ + JasminCode.END
-    
-    def emitINSTANCEFIELD(self, lexeme, typ):
-        #lexeme: String
-        #typ: String
-        return ".field " + lexeme + " " + typ + JasminCode.END
-    
-    def emitRETURN(self):
-        return JasminCode.INDENT + "return" + JasminCode.END
-    
-    def emitIRETURN(self):
-        return JasminCode.INDENT + "ireturn" + JasminCode.END
-    
-    def emitFRETURN(self):
-        return JasminCode.INDENT + "freturn" + JasminCode.END
-    
-    def emitARETURN(self):
-        return JasminCode.INDENT + "areturn" + JasminCode.END
-    
-    
+        return label + ":" + MIPSCode.END 
+    def emitDATA(self):
+        return ".data" + MIPSCode.END

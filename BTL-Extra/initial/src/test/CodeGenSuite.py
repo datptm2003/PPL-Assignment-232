@@ -4,20 +4,33 @@ from AST import *
 
 
 class CheckCodeGenSuite(unittest.TestCase):
-    # def test_int(self):
-    #     """Simple program: int main() {} """
-    #     input = """void main() {putInt(100);}"""
-    #     expect = "100"
-    #     self.assertTrue(TestCodeGen.test(input,expect,500))
 
-    
-
-    def test_int_ast(self):
+    def test_codegen_00(self):
         input = \
             Program([
                 FuncDecl("main",[],Block([
-                    CallStmt("putInt",[BinaryOp("+",NumberLiteral(3),NumberLiteral(4))])
+                    CallStmt("writeNumber",[BinaryOp("+",NumberLiteral(4),NumberLiteral(3))])
                 ]))
             ])
         expect = "7"
+        self.assertTrue(TestCodeGen.test(input,expect,500))
+
+    def test_codegen_01(self):
+        input = \
+            Program([
+                FuncDecl("main",[],Block([
+                    CallStmt("writeNumber",[NumberLiteral(16)])
+                ]))
+            ])
+        expect = "16"
         self.assertTrue(TestCodeGen.test(input,expect,501))
+
+    def test_codegen_02(self):
+        input = \
+            Program([
+                FuncDecl("main",[],Block([
+                    CallStmt("writeNumber",[BinaryOp("+",BinaryOp("+",NumberLiteral(1),NumberLiteral(2)),NumberLiteral(3))])
+                ]))
+            ])
+        expect = "6"
+        self.assertTrue(TestCodeGen.test(input,expect,502))
