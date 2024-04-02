@@ -18,6 +18,9 @@ class Emitter():
 
         self.buff.append(in_)
 
+    def printoutData(self, in_):
+        self.buff.insert(0, in_)
+
     def clearBuff(self):
         self.buff.clear()
 
@@ -29,10 +32,36 @@ class Emitter():
         o["$sp"] += 4
         return self.mips.emitLW(dst,"$sp",0) + self.mips.emitADDI("$sp","$sp",4)
 
-    def emitADDOP(self,dest,src1,src2,o):
-        if type(src1) == int:
-            pass
-        return self.mips.emitADD(dest,src1,src2)
+    def emitVAR(self, name, val):
+        return name +":" + self.mips.emitWORD(val) 
+
+    def emitFUNC(self, name):
+        return self.mips.emitLABEL(name)
+
+    def emitSYS(self):
+        return self.mips.emitSYSCALL()
+
+    def emitEPILOG(self):
+        file = open(self.filename, "w")
+        file.write(''.join(self.buff))
+        file.close()
+
+    def emitTEXT(self):
+        return self.mips.emitTEXT()  
+    
+    def emitDATA(self):
+        return self.mips.emitDATA()
+
+    def emitGLOBAL(self, name):
+        return self.mips.emitGLOBAL(name)
+
+    def emitLI(self, in_, reg):
+        return self.mips.emitLI(reg, in_)
+
+
+    def emitADDOP(self,typ,dest,src1,src2):
+        if type(typ) is NumberType:
+            return self.mips.emitADD(dest,src1,src2)
 
     def emitNUMBERLITERAL(self,number,o):
         hasEmptyReg = False
