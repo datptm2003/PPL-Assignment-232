@@ -1,0 +1,17 @@
+number a
+var x <- "Test"
+func foo(number x) begin
+    number b <- 0
+    ## dynamic k
+    return b
+end
+func main(bool a, number x) begin
+    string a <- "abc"
+    number b <- foo(x) - 6
+    dynamic c
+    dynamic d
+    dynamic y
+    number num <- d + c + b + x * y
+    num <- "abc"
+    ## bool e <- d
+end
