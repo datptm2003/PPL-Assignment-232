@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            string s <- "toi tram kem"
+            string b <- "toi tram kem"
+            writeString(s...b)
+
+        end
+        

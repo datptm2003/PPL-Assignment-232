@@ -1,0 +1,11 @@
+
+func main() begin
+    begin
+        var x <- 789
+    end
+    number x <- true and not false
+    begin
+        var x <- "789"
+    end
+
+end

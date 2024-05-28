@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            number c <- 14
+            c <- c + 1
+            writeNumber(c)
+
+        end
+        

@@ -1,0 +1,9 @@
+
+func help(number x, number y) return x - y - y - y
+func main ()
+begin
+    number a <- 5
+    number b <- 11
+    writeNumber(help(a,b))
+end
+

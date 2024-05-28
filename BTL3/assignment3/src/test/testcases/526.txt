@@ -1,0 +1,7 @@
+
+        func inc(number a) return
+        func main() begin
+            var a <- 1
+            inc(a)
+        end
+        

@@ -1,0 +1,8 @@
+
+func helper(bool x, bool y) return x and y
+func main ()
+begin
+    bool x <- "abc" == "abc"
+    writeBool(helper(x,false))
+end
+

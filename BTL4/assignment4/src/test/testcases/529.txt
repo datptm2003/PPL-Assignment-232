@@ -1,0 +1,6 @@
+func main ()
+        begin
+            if (true) writeNumber(1)
+            else writeString("hi")
+        end
+        

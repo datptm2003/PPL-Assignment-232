@@ -1,0 +1,7 @@
+
+func f()begin
+end
+func main() begin
+f()
+end
+       

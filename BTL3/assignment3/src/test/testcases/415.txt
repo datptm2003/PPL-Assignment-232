@@ -1,0 +1,6 @@
+dynamic a
+number x[2] <- [a,1]
+
+number y <- a - 2
+
+func main() return

@@ -1,0 +1,9 @@
+  
+        func b()
+        func main() return 
+        number a <- b()
+        number c<- 8
+        func b() begin
+        return 1+1
+        end
+        

@@ -1,0 +1,8 @@
+
+        func main ()
+        begin
+            var t<- not false
+            writeBool(t)
+
+        end
+        

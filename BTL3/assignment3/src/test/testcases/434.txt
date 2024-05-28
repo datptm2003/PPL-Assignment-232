@@ -1,0 +1,8 @@
+func foo(number x) begin
+    ## readNumber(x)
+    writeString()
+end
+func main() begin
+    foo(16)
+
+end

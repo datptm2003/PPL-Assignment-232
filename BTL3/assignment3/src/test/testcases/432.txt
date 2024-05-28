@@ -1,0 +1,8 @@
+func foo(number x) begin
+    writeNumber(x)
+    string y <- readString()
+end
+func main() begin
+    foo(16)
+
+end

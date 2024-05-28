@@ -1,0 +1,11 @@
+
+            func fun() begin
+                dynamic b
+                dynamic c
+                string a <- c
+                b <- "a"
+            end
+            func main() begin 
+               
+            end
+        

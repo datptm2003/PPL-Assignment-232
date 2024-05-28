@@ -1,0 +1,9 @@
+func isEven(number n) return n % 2 = 0
+func main() begin
+    number arr[5] <- [156,6546,795,29,1]
+    number i <- 0
+    for i until i < 4 by 1
+        if (isEven(arr[i])) writeString("Even number\n")
+        else writeString("Odd number\n")
+    
+end

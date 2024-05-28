@@ -1,0 +1,8 @@
+
+        func main ()
+        begin
+            var b <- true
+            number c <- 10
+            if (b or false) writeNumber(c)
+        end
+        

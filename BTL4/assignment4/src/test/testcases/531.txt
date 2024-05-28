@@ -1,0 +1,7 @@
+func main ()
+        begin
+            bool a <- false
+            if (a) writeNumber(1)
+            else writeString("hi")
+        end
+        

@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            var b <- true
+            number c <- 0
+            if (not b) for c until c < 12 by 2
+                writeNumber(c)
+        end
+        

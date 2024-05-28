@@ -1,0 +1,11 @@
+
+            func fun() begin
+                dynamic b
+                dynamic c
+                number a[2] <- [b,c]
+                b <- "ahhh"
+            end
+            func main() begin 
+               
+            end
+        

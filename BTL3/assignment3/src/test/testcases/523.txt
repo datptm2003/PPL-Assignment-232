@@ -1,0 +1,5 @@
+
+        func inc(number a)
+        func main() begin
+        end
+        

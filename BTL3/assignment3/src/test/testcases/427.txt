@@ -1,0 +1,14 @@
+func foo(number a, bool b) begin
+    if (b) return a + 1
+    else begin
+        var b <- "b"
+    end
+    begin
+        bool a <- true
+    end
+end
+
+func main() begin
+    number x <- foo(b,true)
+
+end

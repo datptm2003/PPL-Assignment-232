@@ -1,0 +1,11 @@
+func foo(number x) begin
+    number a <- x + 9
+    a <- a + 1
+    return x * 2 - a
+    string x <- "foo"
+    return x
+end
+func main() begin
+    string x <- foo(2e5)
+
+end

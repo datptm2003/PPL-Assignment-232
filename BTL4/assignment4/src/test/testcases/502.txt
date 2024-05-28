@@ -1,0 +1,7 @@
+
+func main ()
+begin
+    string x <- "abc"..."abc"
+    writeString(x)
+end
+

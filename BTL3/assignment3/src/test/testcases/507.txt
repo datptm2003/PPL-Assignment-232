@@ -1,0 +1,10 @@
+
+            func fun() begin
+                number a[3,2]
+                return
+                return a
+            end
+            func main() begin 
+               
+            end
+        

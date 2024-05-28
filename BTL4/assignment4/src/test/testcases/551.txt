@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            var b <- true
+            number c <- 10
+            for c until c < 0 by 1
+                writeNumber(c)
+        end
+        

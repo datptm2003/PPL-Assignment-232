@@ -1,0 +1,7 @@
+func main ()
+        begin
+        number i
+        number arr[10,10]
+        number a <- arr[i,2]
+        end
+        

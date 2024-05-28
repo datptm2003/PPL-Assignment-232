@@ -1,0 +1,6 @@
+func main ()
+        begin
+            string a <- "0.0"
+            writeString(a)
+        end
+        

@@ -1,0 +1,10 @@
+
+        func a(number a, bool b, string s) 
+        begin
+            writeNumber(1)
+        end
+        func main ()
+        begin
+            number a <- 10
+        end
+        

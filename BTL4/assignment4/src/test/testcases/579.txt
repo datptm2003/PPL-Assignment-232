@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            string s <- "toi tram kem"
+            string a <- "toi tram kem"
+            writeBool(s == a)
+
+        end
+        

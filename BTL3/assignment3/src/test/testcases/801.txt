@@ -1,0 +1,10 @@
+
+            func swapNumbers(number a, number b)
+            begin
+                var temp <- a
+                a <- b
+                b <- temp
+            end
+            func foo()
+            func main() return
+        

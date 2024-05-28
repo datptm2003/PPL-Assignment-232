@@ -1,0 +1,9 @@
+  
+        func d() begin
+        return 10
+        return 
+        return "Aaaaa"
+        end
+        func main() begin
+        end
+        

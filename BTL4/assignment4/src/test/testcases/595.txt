@@ -1,0 +1,8 @@
+
+        func main ()
+        begin
+            var t<- 10.0
+            writeNumber(t/5)
+
+        end
+        

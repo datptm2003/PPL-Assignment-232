@@ -1,0 +1,9 @@
+
+        func main() begin
+            number i
+            number a
+            dynamic c
+            for i until c by 1 a<- 10
+            c <- true
+        end
+        

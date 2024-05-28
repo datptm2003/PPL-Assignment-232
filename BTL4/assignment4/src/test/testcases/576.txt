@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            string s <- "toi "
+            writeString(s..."di hoc lop")
+            writeNumber(1)
+
+        end
+        

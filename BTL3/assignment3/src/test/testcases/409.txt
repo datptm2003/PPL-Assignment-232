@@ -1,0 +1,20 @@
+number bcd <- 78910
+var a <- bcd + 456
+func concat(string s1, string s2)
+
+func concat(string s1, string s2) begin
+    bool b <- s1 == s2
+    if (b) return (s1...s2)..."a"
+    else return (s2...s1)..."b"
+end
+
+func foo(number x, string s)
+begin
+    number y <- x + 4
+    s <- concat(s,"s")
+end
+
+func main() begin
+    foo(5,"5")
+    
+end

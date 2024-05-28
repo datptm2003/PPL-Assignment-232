@@ -1,0 +1,1 @@
+Type Mismatch In Statement: For(Id(i), CallExpr(Id(size), [Id(inputString)]), NumLit(1.0), Block([If((BinaryOp(==, ArrayCell(Id(inputString), [Id(i)]), Id(targetChar)), Block([AssignStmt(Id(found), BooleanLit(True)), Break])), [], None), AssignStmt(Id(i), BinaryOp(+, Id(i), NumLit(1.0)))]))

@@ -1,0 +1,6 @@
+func main ()
+        begin
+            bool a <- true
+            writeBool(a and true)
+        end
+        

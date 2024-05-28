@@ -1,0 +1,12 @@
+
+        func inc(number a) return a + 1
+        func mai() begin
+            begin
+            begin
+            return 1
+            end
+            end
+            return "str"
+        end
+        func main() return
+        

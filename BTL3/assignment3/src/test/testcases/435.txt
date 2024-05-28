@@ -1,0 +1,13 @@
+func foo(number x, string s, bool b) begin
+    number x <- readNumber() / 8
+    writeNumber(x)
+    string s <- readString()..."abc"
+    writeString(s)
+    bool b <- readBool() or b
+    writeBool(b)
+end
+func main() begin
+    foo(16,"Dat",false)
+    string s <- "123"
+    writeString(s)
+end

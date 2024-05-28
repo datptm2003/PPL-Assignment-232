@@ -1,0 +1,7 @@
+
+        func main ()
+        begin
+            var b <- true
+            if (b) writeString("b is true")
+        end
+        

@@ -1,0 +1,7 @@
+
+func main ()
+begin
+    number x <- 7.5 % 3.5
+    writeNumber(x)
+end
+

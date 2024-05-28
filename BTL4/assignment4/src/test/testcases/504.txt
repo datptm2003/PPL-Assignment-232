@@ -1,0 +1,7 @@
+
+func main ()
+begin
+    bool x <- "abc" == "def"
+    writeBool(x)
+end
+

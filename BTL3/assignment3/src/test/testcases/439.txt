@@ -1,0 +1,11 @@
+func compare(number a[5]) begin
+    number arr[5] <- [156,6546,795,29,1]
+    number i <- 0
+    for i until i < 5 by 1
+        if (a[i] != arr[i]) break
+    writeString("End.")
+end
+func main() begin
+    compare([1,2,4,5,6,7])
+    
+end

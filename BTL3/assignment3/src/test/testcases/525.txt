@@ -1,0 +1,9 @@
+
+        func inc(number a) begin
+        number a <- b
+        dynamic c <- b
+        c <- 10
+        end
+        func main() begin
+        end
+        

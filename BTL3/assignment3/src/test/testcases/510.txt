@@ -1,0 +1,8 @@
+
+            func foo(number a[2,2]) return
+            func main() begin
+                dynamic x
+                number a[2,2] <- [[x,2],[1,2]]
+                x <- 10
+            end
+        

@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            var b <- true
+            number c <- 10
+            if (b and false) writeNumber(c)
+            else writeString("Toi da co gang het suc")
+        end
+        

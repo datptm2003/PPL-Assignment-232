@@ -1,0 +1,4 @@
+dynamic a
+string x <- ["a",a,[a]]
+
+func main() return

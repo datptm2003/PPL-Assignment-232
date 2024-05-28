@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            number c <- 11
+            for c until c < 12 by 2
+                writeNumber(c)
+
+        end
+        

@@ -1,0 +1,9 @@
+
+        func main ()
+        begin
+            var b <- true
+            b <- not b
+            if (b) writeString("b is true")
+            else writeString("b is false")
+        end
+        

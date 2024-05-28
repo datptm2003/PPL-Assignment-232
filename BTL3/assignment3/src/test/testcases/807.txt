@@ -1,0 +1,42 @@
+
+        func size(string s[10]) return 10
+        func findChar(string inputString[10], string targetChar)
+begin
+    var found <- false
+    var i <- 0
+
+    ##Iterate through the string to find the target character
+    for i until i <= size(inputString) by 1
+    begin
+        if (inputString[i] == targetChar)
+        begin
+            found <- true
+            break
+        end
+        i <- i + 1
+    end
+
+    ##Check if the target character was found
+    if (found) begin
+        writeString("Character ' ")
+        writeString(targetChar)
+        writeString("' found in the string.")
+        end
+    else begin
+        writeString("Character ' ")
+        writeString(targetChar)
+        writeString("' not found in the string.")
+    end
+end
+
+## Main program
+func main()
+begin
+    var input <- readString()
+    var target <- readString()  ##Character to find in the string
+
+    ##Call the findChar function to search for the target character
+    findChar(input, target)
+end
+
+        
